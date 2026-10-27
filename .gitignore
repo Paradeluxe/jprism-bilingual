@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+*.pt
+*.gguf
+*.safetensors
+*_raw.json
+*.bak*
+*.nan_quarantine
+lenses/
+fit_ckpt/

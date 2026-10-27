@@ -1,0 +1,27 @@
+# FIT_CARD — qwen3-14b n2 Lstep2 wikitext
+
+**When:** 2026-09-24 02:32 UTC
+**Where:** um-a100-03 (SICC)
+**Status:** fit complete
+**Model key:** 14B
+**HF id:** Qwen/Qwen3-14B
+**Loaded from:** `~/jspace/models/Qwen3-14B`
+**n_layers:** 40
+**d_model:** 5120
+**source_layers (every 2):** [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38]
+**target_layer:** final (39)
+**max_seq_len:** 128
+**skip_first:** 16
+**dim_batch:** 2
+**N prompts used:** 2
+**seed:** 20260913
+**corpus:** `~/jspace/jspace/fit_corpus/wikitext_n1000_L128.jsonl`
+**corpus_sha256:** `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee`
+**lens:** `~/jspace/jspace/lenses/local/qwen3-14b/jlens_n2_Lstep2_wikitext.smoke.pt`
+**checkpoint:** `~/jspace/jspace/fit_ckpt/qwen3-14b/fit_ckpt_n2_Lstep2_wikitext.smoke.pt`
+**fit_sec:** 474.9
+**fit_hours:** 0.13
+**vram_peak_gb:** 29.487940311431885
+**dtype:** fp16
+**protocol:** LOCKED_DECISIONS / SOP_LOCAL_FIT (NP not in main table)
+**track:** main Qwen3 scale table (0.6/1.7/4B)

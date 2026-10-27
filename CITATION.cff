@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "jspace-bilingual-lens: controlled comparison of English- and Chinese-fitted Jacobian lenses"
+authors:
+  - family-names: Liu
+    given-names: Zhengyuan
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/Paradeluxe/jspace-bilingual-lens"
+keywords:
+  - jacobian-lens
+  - mechanistic-interpretability
+  - multilingual
+  - logit-lens
+  - bilingualism
+abstract: >-
+  Fitting, measurement, audit, and analysis code for a controlled comparison of
+  Jacobian lenses fitted on English WikiText versus Chinese Wikipedia corpora,
+  applied to the same models and the same probes. Depends on
+  anthropics/jacobian-lens (Apache-2.0).
