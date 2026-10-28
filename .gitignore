@@ -9,3 +9,8 @@ __pycache__/
 *.nan_quarantine
 lenses/
 fit_ckpt/
+
+# Local trees moved in from jspace-qwen-exp and the paper project.
+# Present on this machine; not part of the git history.
+/experiment/
+/manuscript/
