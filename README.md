@@ -144,7 +144,7 @@ The old paths are directory junctions, so existing absolute paths keep resolving
 
 The Jacobian-lens implementation is still [anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens). Paths inside the scripts still assume the original project layout (`~/jspace` on the cluster, local Hugging Face caches on the workstation). Those paths have not been rewritten.
 
-`paper-writing` is a Syncthing folder. Exclude the junction at `projects/jspace-bilingual`, or pause sync for that folder, before the client follows the junction and uploads the manuscript a second time.
+`paper-writing` was once synced to another machine by a Syncthing client running under WSL. That client has been removed from this machine. While it ran it recorded the junction as a zero-byte symlink entry, so the manuscript was never uploaded a second time.
 
 ## 10. Reproduce
 
