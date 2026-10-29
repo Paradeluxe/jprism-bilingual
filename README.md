@@ -113,6 +113,8 @@ Code in `src/`; per-lens provenance in `cards/`.
 4. **Score.** The readings defined under Measurement. `src/analysis/bilingual_align.py`.
 5. **Audit.** Four states per (model, corpus), joined by `src/audit/full_audit.py`: lens file, measurement, prompt compliance, fit card. A rung counts when all four hold.
 
+Fits ran on single-GPU nodes of the SICC cluster, NVIDIA H800 80 GB or A100 40 GB.
+
 Fitted lenses and raw measurements are local (about 31 GB) and not in git; the code rebuilds them from the corpora.
 
 ## Reproduce
