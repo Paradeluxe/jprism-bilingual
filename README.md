@@ -27,7 +27,7 @@ The results could indicate:
 
 One English lens and one Chinese lens per row: the figures use 23 checkpoints (46 lenses), and the repository fits 38 rungs (76 lenses).
 
-**Model matrix**
+### Model matrix
 
 | Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -70,7 +70,7 @@ One English lens and one Chinese lens per row: the figures use 23 checkpoints (4
 | | Gemma-4-E4B | E4B | 42 | 2560 | — | bf16 |
 | | Gemma-4-12B | 12B | 48 | 3840 | — | bf16 |
 
-**Corpora**
+### Corpora
 
 | Corpus | Source | Config | Windows | sha256 |
 | --- | --- | --- | --- | --- |
@@ -79,7 +79,7 @@ One English lens and one Chinese lens per row: the figures use 23 checkpoints (4
 
 Both sources are Wikipedia-derived, CC BY-SA 3.0 and GFDL. The built files ship in [`corpora/`](corpora/); each model re-tokenizes the decoded windows at fit time.
 
-**Probes**
+### Probes
 
 | Probe | Prompt | Rank targets |
 | --- | --- | --- |
@@ -91,6 +91,8 @@ Both sources are Wikipedia-derived, CC BY-SA 3.0 and GFDL. The built files ship 
 ## Measurement
 
 Each lens is read at the last position of the four probes on every scored layer. The top-100 candidates of each pool are stored per (probe, layer) cell with the answer rank, scanned to depth 500; `src/measure/pilot_core.py` fixes probes and ranks.
+
+### Readings
 
 | Reading | Definition |
 | --- | --- |
