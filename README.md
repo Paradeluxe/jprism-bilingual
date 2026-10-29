@@ -25,25 +25,25 @@ The results could indicate:
 
 ## Materials
 
-The matrix covers five families. Qwen3 is dense, from 0.6B to 32B. Qwen3.5 adds 0.8B, 2B and 9B. Qwen3.6 and Qwen3.8 are 27B hybrids, one generation apart, with three linear-attention blocks per full-attention block. Gemma-4 (E2B, E4B, 12B) is the only non-Qwen family.
+The matrix covers five families. Qwen3 runs from 0.6B to 32B. Qwen3.5 adds 0.8B, 2B and 9B. Qwen3.6 and Qwen3.8 are 27B hybrids, one generation apart, with three linear-attention blocks per full-attention block. Gemma-4 (E2B, E4B, 12B) is the only non-Qwen family.
 
 One English lens and one Chinese lens are fitted per checkpoint: the figures use 23 checkpoints (46 lenses), and the repository fits the small-checkpoint quantized variants as extra rungs, 38 in total (76 lenses).
 
-| Family | Checkpoint | Params | Layers | d_model | Weights |
-| --- | --- | --- | --- | --- | --- |
-| Qwen3, dense | Qwen3-0.6B | 0.6B | 28 | 1024 | bf16 |
-| | Qwen3-4B | 4B | 36 | 2560 | bf16 |
-| | Qwen3-8B | 8B | 36 | 4096 | bf16 |
-| | Qwen3-14B | 14B | 40 | 5120 | bf16 |
-| | Qwen3-32B-FP8 | 32B | 64 | 5120 | FP8 |
-| Qwen3.5 | Qwen3.5-0.8B | 0.8B | 24 | 1024 | bf16 |
-| | Qwen3.5-2B | 2B | 24 | 2048 | bf16 |
-| | Qwen3.5-9B | 9B | 32 | 4096 | bf16 |
-| Qwen3.6 | Qwen3.6-27B | 27B | 64 | 5120 | bf16 |
-| Qwen3.8 | Qwen3.8-27B | 27B | 64 | 5120 | bf16 |
-| Gemma-4 | Gemma-4-E2B | E2B | 35 | 1536 | bf16 |
-| | Gemma-4-E4B | E4B | 42 | 2560 | bf16 |
-| | Gemma-4-12B | 12B | 48 | 3840 | bf16 |
+| Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
+| --- | --- | --- | --- | --- | --- | --- |
+| Qwen3 | Qwen3-0.6B | 0.6B | 28 | 1024 | full | bf16 |
+| | Qwen3-4B | 4B | 36 | 2560 | full | bf16 |
+| | Qwen3-8B | 8B | 36 | 4096 | full | bf16 |
+| | Qwen3-14B | 14B | 40 | 5120 | full | bf16 |
+| | Qwen3-32B-FP8 | 32B | 64 | 5120 | full | FP8 |
+| Qwen3.5 | Qwen3.5-0.8B | 0.8B | 24 | 1024 | linear | bf16 |
+| | Qwen3.5-2B | 2B | 24 | 2048 | linear | bf16 |
+| | Qwen3.5-9B | 9B | 32 | 4096 | linear | bf16 |
+| Qwen3.6 | Qwen3.6-27B | 27B | 64 | 5120 | hybrid 3:1 | bf16 |
+| Qwen3.8 | Qwen3.8-27B | 27B | 64 | 5120 | hybrid 3:1 | bf16 |
+| Gemma-4 | Gemma-4-E2B | E2B | 35 | 1536 | — | bf16 |
+| | Gemma-4-E4B | E4B | 42 | 2560 | — | bf16 |
+| | Gemma-4-12B | 12B | 48 | 3840 | — | bf16 |
 
 Quantized rungs, 25 in total:
 
@@ -56,7 +56,7 @@ Quantized rungs, 25 in total:
 | Qwen3.5-0.8B | FP8, Q8_0, Q6_K, Q5_K_M, Q4_K_M, Q4_K_S, Q3_K_M, Q2_K | 8 |
 | Qwen3.5-2B | Q4_K_S, Q4_K_M, Q3_K_M, Q2_K | 4 |
 
-Qwen3-1.7B appears only under quantization. The 32B rung is the official FP8 checkpoint, since the bf16 one cannot run the backward pass on one 80 GB card.
+Qwen3-1.7B appears only under quantization. The 32B rung is the official FP8 checkpoint, since the bf16 one cannot run the backward pass on one 80 GB card. Gemma-4's attention type is not annotated.
 
 | Corpus | Source | Config | Windows | sha256 |
 | --- | --- | --- | --- | --- |
