@@ -23,6 +23,31 @@ The results could indicate:
 
 **Figure 3.** Blackouts in five (model, probe) cells over three consecutive measured layers. Each bar gives the composition of that lens's top-100 pool; the ten highest-ranked candidates stand beside it.
 
+## Materials
+
+Two lenses per checkpoint, one per corpus. The matrix behind the figures is 23 checkpoints (46 lenses); the repository also fits the small-model quantized variants as separate rungs, for 38 rungs and 76 lenses in total.
+
+| Corpus | Source | Config | Windows | sha256 |
+| --- | --- | --- | --- | --- |
+| English | `Salesforce/wikitext` | `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
+| Chinese | `wikimedia/wikipedia` | `20231101.zh` | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
+
+Both corpora are cut in stream order with the Qwen3-0.6B tokenizer. The Chinese build adds Han-ratio guards, and both drop any window that contains a probe string or a listed answer paraphrase. Each model re-tokenizes the decoded windows with its own tokenizer at fit time.
+
+| Family | Checkpoints | Layers | Precision |
+| --- | --- | --- | --- |
+| Qwen3, dense | 0.6B, 1.7B, 4B, 8B, 14B, 32B | 28, 28, 36, 36, 40, 64 | bf16, 32B as FP8 |
+| Qwen3.5 | 0.8B, 2B, 9B | 24, 24, 32 | bf16 |
+| Qwen3.6, Qwen3.8 | 27B each | 64 | bf16, hybrid attention |
+| Gemma-4 | E2B, E4B, 12B | 35, 42, 48 | bf16 |
+
+| Probe | Prompt | Rank targets |
+| --- | --- | --- |
+| P1 | `Fact: The currency used in the country shaped like a boot is` | euro, eur |
+| P2 | `The number of legs on the animal that spins webs is` | 8, eight |
+| P3 | `The capital of France is` | paris |
+| P4 | `Think of a sport: people kick a round ball into a net. The sport is` | football, soccer |
+
 ## Pipeline
 
 Two lenses per model, one per corpus, measured on the same probes and audited per cell. The code is in `src/`; per-lens provenance is in `cards/`.
