@@ -32,29 +32,43 @@ One English lens and one Chinese lens are fitted per checkpoint: the figures use
 | Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
 | --- | --- | --- | --- | --- | --- | --- |
 | Qwen3 | Qwen3-0.6B | 0.6B | 28 | 1024 | full | bf16 |
+| | Qwen3-0.6B-FP8 | 0.6B | 28 | 1024 | full | FP8 |
+| | Qwen3-0.6B-Q8_0 | 0.6B | 28 | 1024 | full | GGUF Q8_0 |
+| | Qwen3-0.6B-Q6_K | 0.6B | 28 | 1024 | full | GGUF Q6_K |
+| | Qwen3-0.6B-Q5_K_M | 0.6B | 28 | 1024 | full | GGUF Q5_K_M |
+| | Qwen3-0.6B-Q4_K_M | 0.6B | 28 | 1024 | full | GGUF Q4_K_M |
+| | Qwen3-0.6B-Q3_K_M | 0.6B | 28 | 1024 | full | GGUF Q3_K_M |
+| | Qwen3-0.6B-Q2_K | 0.6B | 28 | 1024 | full | GGUF Q2_K |
+| | Qwen3-1.7B-BNB4 | 1.7B | 28 | 2048 | full | bitsandbytes 4-bit |
+| | Qwen3-1.7B-Q4_K_M | 1.7B | 28 | 2048 | full | GGUF Q4_K_M |
+| | Qwen3-1.7B-Q3_K_M | 1.7B | 28 | 2048 | full | GGUF Q3_K_M |
+| | Qwen3-1.7B-Q2_K | 1.7B | 28 | 2048 | full | GGUF Q2_K |
 | | Qwen3-4B | 4B | 36 | 2560 | full | bf16 |
+| | Qwen3-4B-AWQ | 4B | 36 | 2560 | full | AWQ |
 | | Qwen3-8B | 8B | 36 | 4096 | full | bf16 |
+| | Qwen3-8B-GPTQ-Int4 | 8B | 36 | 4096 | full | GPTQ-Int4 |
 | | Qwen3-14B | 14B | 40 | 5120 | full | bf16 |
 | | Qwen3-32B-FP8 | 32B | 64 | 5120 | full | FP8 |
 | Qwen3.5 | Qwen3.5-0.8B | 0.8B | 24 | 1024 | linear | bf16 |
+| | Qwen3.5-0.8B-FP8 | 0.8B | 24 | 1024 | linear | FP8 |
+| | Qwen3.5-0.8B-Q8_0 | 0.8B | 24 | 1024 | linear | GGUF Q8_0 |
+| | Qwen3.5-0.8B-Q6_K | 0.8B | 24 | 1024 | linear | GGUF Q6_K |
+| | Qwen3.5-0.8B-Q5_K_M | 0.8B | 24 | 1024 | linear | GGUF Q5_K_M |
+| | Qwen3.5-0.8B-Q4_K_M | 0.8B | 24 | 1024 | linear | GGUF Q4_K_M |
+| | Qwen3.5-0.8B-Q4_K_S | 0.8B | 24 | 1024 | linear | GGUF Q4_K_S |
+| | Qwen3.5-0.8B-Q3_K_M | 0.8B | 24 | 1024 | linear | GGUF Q3_K_M |
+| | Qwen3.5-0.8B-Q2_K | 0.8B | 24 | 1024 | linear | GGUF Q2_K |
 | | Qwen3.5-2B | 2B | 24 | 2048 | linear | bf16 |
+| | Qwen3.5-2B-Q4_K_S | 2B | 24 | 2048 | linear | GGUF Q4_K_S |
+| | Qwen3.5-2B-Q4_K_M | 2B | 24 | 2048 | linear | GGUF Q4_K_M |
+| | Qwen3.5-2B-Q3_K_M | 2B | 24 | 2048 | linear | GGUF Q3_K_M |
+| | Qwen3.5-2B-Q2_K | 2B | 24 | 2048 | linear | GGUF Q2_K |
 | | Qwen3.5-9B | 9B | 32 | 4096 | linear | bf16 |
 | Qwen3.6 | Qwen3.6-27B | 27B | 64 | 5120 | hybrid 3:1 | bf16 |
 | Qwen3.8 | Qwen3.8-27B | 27B | 64 | 5120 | hybrid 3:1 | bf16 |
 | Gemma-4 | Gemma-4-E2B | E2B | 35 | 1536 | — | bf16 |
 | | Gemma-4-E4B | E4B | 42 | 2560 | — | bf16 |
 | | Gemma-4-12B | 12B | 48 | 3840 | — | bf16 |
-
-Quantized rungs, 25 in total:
-
-| Checkpoint | Variants | Rungs |
-| --- | --- | --- |
-| Qwen3-0.6B | FP8, Q8_0, Q6_K, Q5_K_M, Q4_K_M, Q3_K_M, Q2_K | 7 |
-| Qwen3-1.7B | BNB4, Q4_K_M, Q3_K_M, Q2_K | 4 |
-| Qwen3-4B | AWQ | 1 |
-| Qwen3-8B | GPTQ-Int4 | 1 |
-| Qwen3.5-0.8B | FP8, Q8_0, Q6_K, Q5_K_M, Q4_K_M, Q4_K_S, Q3_K_M, Q2_K | 8 |
-| Qwen3.5-2B | Q4_K_S, Q4_K_M, Q3_K_M, Q2_K | 4 |
 
 Qwen3-1.7B appears only under quantization. The 32B rung is the official FP8 checkpoint, since the bf16 one cannot run the backward pass on one 80 GB card. Gemma-4's attention type is not annotated.
 
