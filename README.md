@@ -1,10 +1,10 @@
 # J-Prism: Language Models Think Semantically, with Preferred Languages
 
 ## Gist
-- The lens has a preference for languages, as each lens usually gives the larger share to the language it was fitted on.
-- The model has a preference for languages, as the lens fitted on the model's own language usually reads a purer share of it than the other lens does.
-- The thinking (hidden state) has a preference for languages, as a blackout usually falls on one lens while the other still reads.
-- The thinking (hidden state) is semantic, as the two pools overlap in meaning across the two fitted languages and a small minority of other languages.
+- **The lens has a preference for languages**, as each lens usually gives the larger share to the language it was fitted on.
+- **The model has a preference for languages**, as the lens fitted on the model's own language usually reads a purer share of it than the other lens does.
+- **The thinking has a preference for languages**, as a blackout usually falls on one lens while the other still reads.
+- **The thinking is semantic**, as the two pools overlap in meaning across the two fitted languages and a small minority of other languages.
 
 
 
