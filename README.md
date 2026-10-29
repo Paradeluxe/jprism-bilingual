@@ -25,9 +25,9 @@ The results could indicate:
 
 ## Materials
 
-One English lens and one Chinese lens per row: the figures use 23 checkpoints (46 lenses), and the repository fits 38 rungs (76 lenses).
-
 ### Model matrix
+
+One English lens and one Chinese lens per row: the figures use 23 checkpoints (46 lenses), and the repository fits 38 rungs (76 lenses).
 
 | Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -90,9 +90,9 @@ Both sources are Wikipedia-derived, CC BY-SA 3.0 and GFDL. The built files ship 
 
 ## Measurement
 
-Each lens is read at the last position of the four probes on every scored layer. The top-100 candidates of each pool are stored per (probe, layer) cell with the answer rank, scanned to depth 500; `src/measure/pilot_core.py` fixes probes and ranks.
-
 ### Readings
+
+Each lens is read at the last position of the four probes on every scored layer. The top-100 candidates of each pool are stored per (probe, layer) cell with the answer rank, scanned to depth 500; `src/measure/pilot_core.py` fixes probes and ranks.
 
 | Reading | Definition |
 | --- | --- |
