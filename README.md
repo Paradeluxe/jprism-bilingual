@@ -25,9 +25,7 @@ The results could indicate:
 
 ## Materials
 
-The matrix covers five families. Qwen3 runs from 0.6B to 32B. Qwen3.5 adds 0.8B, 2B and 9B. Qwen3.6 and Qwen3.8 are 27B hybrids, one generation apart, with three linear-attention blocks per full-attention block. Gemma-4 (E2B, E4B, 12B) is the only non-Qwen family.
-
-One English lens and one Chinese lens are fitted per checkpoint: the figures use 23 checkpoints (46 lenses), and the repository fits the small-checkpoint quantized variants as extra rungs, 38 in total (76 lenses).
+One English lens and one Chinese lens per row: the figures use 23 checkpoints (46 lenses), and the repository fits 38 rungs (76 lenses).
 
 | Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -70,8 +68,6 @@ One English lens and one Chinese lens are fitted per checkpoint: the figures use
 | | Gemma-4-E4B | E4B | 42 | 2560 | — | bf16 |
 | | Gemma-4-12B | 12B | 48 | 3840 | — | bf16 |
 
-Qwen3-1.7B appears only under quantization. The 32B rung is the official FP8 checkpoint, since the bf16 one cannot run the backward pass on one 80 GB card. Gemma-4's attention type is not annotated.
-
 | Corpus | Source | Config | Windows | sha256 |
 | --- | --- | --- | --- | --- |
 | English | [`Salesforce/wikitext`](https://huggingface.co/datasets/Salesforce/wikitext) | `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
@@ -101,12 +97,12 @@ The overlap uses [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) d
 
 ## Pipeline
 
-One English lens and one Chinese lens per model, measured on the same probes and audited per cell. Code in `src/`; per-lens provenance in `cards/`.
+Code in `src/`; per-lens provenance in `cards/`.
 
-1. **Corpora.** 1,000 non-overlapping 128-token windows per corpus, cut in stream order with the Qwen3-0.6B tokenizer; the Chinese build adds Han-ratio guards, and both drop windows that contain a probe or a listed answer paraphrase.
+1. **Corpora.** Windows cut in stream order with the Qwen3-0.6B tokenizer; the Chinese build adds Han-ratio guards, and both drop windows that contain a probe or a listed answer paraphrase.
 2. **Fit.** One lens per corpus per model, the Jacobian of the final-layer output with respect to an earlier residual stream, averaged over the 1,000 windows in fp32, sampling every second source layer. Prompts with a non-finite Jacobian are skipped; a lens above 2% skips is refused. Registry: `src/measure/run_fit_sicc.py`.
-3. **Measure.** Both lenses applied to the four probes at the last position of every scored layer; the readout is defined under Measurement. `src/measure/measure_sicc.py`.
-4. **Score.** Hit rates, language composition, blackouts and overlap, as defined under Measurement. `src/analysis/bilingual_align.py`.
+3. **Measure.** Both lenses applied to the probes. `src/measure/measure_sicc.py`.
+4. **Score.** The readings defined under Measurement. `src/analysis/bilingual_align.py`.
 5. **Audit.** Four states per (model, corpus), joined by `src/audit/full_audit.py`: lens file, measurement, prompt compliance, fit card. A rung counts when all four hold.
 
 Fitted lenses and raw measurements are local (about 31 GB) and not in git; the code rebuilds them from the corpora.
