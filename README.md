@@ -27,6 +27,8 @@ The results could indicate:
 
 One English lens and one Chinese lens per row: the figures use 23 checkpoints (46 lenses), and the repository fits 38 rungs (76 lenses).
 
+**Model matrix**
+
 | Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
 | --- | --- | --- | --- | --- | --- | --- |
 | Qwen3 | Qwen3-0.6B | 0.6B | 28 | 1024 | full | bf16 |
@@ -68,12 +70,16 @@ One English lens and one Chinese lens per row: the figures use 23 checkpoints (4
 | | Gemma-4-E4B | E4B | 42 | 2560 | — | bf16 |
 | | Gemma-4-12B | 12B | 48 | 3840 | — | bf16 |
 
+**Corpora**
+
 | Corpus | Source | Config | Windows | sha256 |
 | --- | --- | --- | --- | --- |
 | English | [`Salesforce/wikitext`](https://huggingface.co/datasets/Salesforce/wikitext) | `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
 | Chinese | [`wikimedia/wikipedia`](https://huggingface.co/datasets/wikimedia/wikipedia) | `20231101.zh` | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
 
 Both sources are Wikipedia-derived, CC BY-SA 3.0 and GFDL. The built files ship in [`corpora/`](corpora/); each model re-tokenizes the decoded windows at fit time.
+
+**Probes**
 
 | Probe | Prompt | Rank targets |
 | --- | --- | --- |
