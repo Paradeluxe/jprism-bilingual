@@ -54,12 +54,6 @@ Merity, S., Xiong, C., Bradbury, J., and Socher, R. (2017). *Pointer Sentinel Mi
 
 Wikimedia Foundation. Chinese Wikipedia dump `wikimedia/wikipedia`, config `20231101.zh`.
 
-## License
-
-Apache-2.0 covers everything in this repository. The upstream Jacobian-lens library is Anthropic's, also Apache-2.0, and is a declared dependency. The lens algorithm stays in that library.
-
-If you use the code, cite `CITATION.cff`.
-
 ## Author
 
 Code and analyses: Zhengyuan Liu. The full author list is in the accompanying paper.
