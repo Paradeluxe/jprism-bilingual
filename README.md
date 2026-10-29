@@ -77,7 +77,7 @@ One English lens and one Chinese lens per row: the figures use 23 checkpoints (4
 | English | [`Salesforce/wikitext`](https://huggingface.co/datasets/Salesforce/wikitext) | `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
 | Chinese | [`wikimedia/wikipedia`](https://huggingface.co/datasets/wikimedia/wikipedia) | `20231101.zh` | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
 
-Both sources are released under CC BY-SA 3.0 and GFDL; the built files ship in [`corpora/`](corpora/). Each model re-tokenizes the decoded windows at fit time.
+Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [`corpora/`](corpora/), and the sha256 column is their digest. Each model re-tokenizes the decoded windows at fit time.
 
 ### Probes
 
