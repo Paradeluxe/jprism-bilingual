@@ -40,7 +40,8 @@ logging.basicConfig(
 logger = logging.getLogger("run_fit_sicc")
 
 PROJECT = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_CORPUS = os.path.join(PROJECT, "fit_corpus", "wikitext_n1000_L128.jsonl")
+REPO = os.path.dirname(os.path.dirname(PROJECT))
+DEFAULT_CORPUS = os.path.join(REPO, "corpora", "wikitext_n1000_L128.jsonl")
 CORPUS_PATH = DEFAULT_CORPUS   # overridable: --corpus
 CORPUS_TAG = "wikitext"        # overridable: --corpus-tag (命名标识：镜片/存档/卡片)
 
@@ -592,7 +593,8 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=0,
                         help="use only first N prompts and write *.smoke artifacts")
     parser.add_argument("--corpus", default=None,
-                        help="corpus jsonl path (default: fit_corpus/wikitext_n1000_L128.jsonl)")
+                        help="corpus jsonl path (default: "
+                             "corpora/wikitext_n1000_L128.jsonl under the repository root)")
     parser.add_argument("--corpus-tag", default="wikitext",
                         help="corpus tag used in lens/ckpt filenames + card title")
     parser.add_argument("--source-layers", default=None,
@@ -600,9 +602,13 @@ def main() -> None:
                              "layers (default: every 2 from layer 0). Used "
                              "to re-fit only the layers damaged by the old "
                              "fp16 lens store (Qwen3.5 shallow layers).")
+    parser.add_argument("--root", default=None,
+                        help="project root holding lenses/ and fit_ckpt/ "
+                             "(default: this directory, src/measure)")
     args = parser.parse_args()
 
     global CORPUS_PATH, CORPUS_TAG
+    root = os.path.abspath(os.path.expanduser(args.root)) if args.root else PROJECT
     if args.corpus:
         CORPUS_PATH = args.corpus
     if args.corpus_tag:
@@ -615,8 +621,8 @@ def main() -> None:
     dtype_name = cfg.get("dtype", "fp16")
     dtype = torch.bfloat16 if dtype_name == "bf16" else torch.float16
 
-    lens_dir = os.path.join(PROJECT, "lenses", "local", tag)
-    ckpt_dir = os.path.join(PROJECT, "fit_ckpt", tag)
+    lens_dir = os.path.join(root, "lenses", "local", tag)
+    ckpt_dir = os.path.join(root, "fit_ckpt", tag)
     os.makedirs(lens_dir, exist_ok=True)
     os.makedirs(ckpt_dir, exist_ok=True)
 
@@ -633,7 +639,7 @@ def main() -> None:
 
     lens_path = os.path.join(lens_dir, "jlens_n%d_Lstep%d_%s%s.pt" % (n_use, LAYER_STEP, CORPUS_TAG, suffix))
     ckpt_path = os.path.join(ckpt_dir, "fit_ckpt_n%d_Lstep%d_%s%s.pt" % (n_use, LAYER_STEP, CORPUS_TAG, suffix))
-    card_path = os.path.join(PROJECT, "FIT_CARD_%s%s.md" % (tag, suffix))
+    card_path = os.path.join(lens_dir, "FIT_CARD_%s%s.md" % (tag, suffix))
 
     if os.path.isfile(lens_path):
         logger.info("lens already exists at %s — skip fit (delete to refit)", lens_path)

@@ -25,7 +25,8 @@ from pathlib import Path
 
 os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
 
-PROJECT = Path(os.path.expanduser("~/jspace"))
+HERE = Path(__file__).resolve().parent
+PROJECT = HERE
 OUT_DIR = PROJECT / "RESULT" / "MEASURE"
 CLUSTER_OUT = PROJECT / "RESULT" / "MEASURE_SICC"
 
@@ -76,7 +77,7 @@ def find_lenses() -> list[tuple[str, Path, str]]:
 
 
 def load_registry():
-    spec = importlib.util.spec_from_file_location("m", PROJECT / "run_fit_sicc.py")
+    spec = importlib.util.spec_from_file_location("m", HERE / "run_fit_sicc.py")
     m = importlib.util.module_from_spec(spec)
     sys.argv = ["x"]
     try:
@@ -195,7 +196,7 @@ def measure_one(tag, lens_path, corpus_tag, cfg, device, layers_wanted):
             str(local), gguf_file=gfile, dtype=dtype)
 
     if cfg.get("quantized_fit_fix"):
-        sys.path.insert(0, str(PROJECT))
+        sys.path.insert(0, str(HERE))
         import fix_awq_backend
         fix_awq_backend.force_gemm_autograd()
         if cfg.get("gptq_no_optimum"):
@@ -366,7 +367,16 @@ def main():
     ap.add_argument("--device", default="cpu", choices=["cpu", "cuda"])
     ap.add_argument("--only", action="append", default=None)
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--root", default=None,
+                    help="project root holding lenses/ and RESULT/ "
+                         "(default: this directory, src/measure)")
     args = ap.parse_args()
+
+    global PROJECT, OUT_DIR, CLUSTER_OUT
+    if args.root:
+        PROJECT = Path(args.root).expanduser().resolve()
+        OUT_DIR = PROJECT / "RESULT" / "MEASURE"
+        CLUSTER_OUT = PROJECT / "RESULT" / "MEASURE_SICC"
 
     CLUSTER_OUT.mkdir(parents=True, exist_ok=True)
     reg = load_registry()
