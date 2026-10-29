@@ -90,22 +90,15 @@ Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [
 
 ## Measurement
 
-### Readout
+Every row of the results table rests on the same cells: one probe at one layer, read at the last position of both lenses, top-100 candidates.
 
-Each lens is read at the last position of the probes on every scored layer. One cell is one probe at one layer; `pos=-2` is stored and kept out of the aggregate. Candidate strings are stored for the top 100 tokens, and `j_rank` is the answer rank in the lens's vocabulary order, scanned to a depth of 500; past that the rank is missing. A match is a decoded token, stripped and lower-cased, equal to a rank target; `european` does not count as `euro`. The report also stores the model's own final-layer Hit@5 (`model_hit5`; 0 means the tokenizer does not match) and a 24-token greedy continuation, excluded from the hit rate. Each measurement writes `MEAS_<tag>_<corpus>_raw.json` and a markdown summary. Probes and ranks are fixed in `src/measure/pilot_core.py`, so cluster and local numbers are the same measurement.
+| Reading | Supports | Definition |
+| --- | --- | --- |
+| Language shares | the lens and model rows | Share of a pool in four bands: English, Chinese, other language, non-language. Han is Chinese; Latin is English unless the hub table marks a foreign word; other scripts are other language; digits and symbols are non-language. |
+| Blackout | the blackout row | A top-5 pool with no language token. |
+| Overlap | the semantic row | Four measures at one layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
 
-### Readings
-
-| Reading | Definition |
-| --- | --- |
-| Hit@5, Hit@10, Hit@100 | Share of cells whose best answer rank is at most k, for k = 5, 10, 100. |
-| Language composition | Share of the pool in four bands: English, Chinese, other language, non-language. Han is Chinese; Latin is English unless the hub table marks a foreign word; other scripts are other language; digits and symbols are non-language. |
-| Blackout | A top-5 pool with no language token. |
-| Overlap | Four measures at the same layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
-
-### Alignment
-
-The overlap compares only language tokens, at depth x limited by the shorter list. Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
+Only language tokens are compared for overlap, and x is limited by the shorter list. Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
 
 ## Pipeline
 
