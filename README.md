@@ -55,6 +55,6 @@ Merity, S., Xiong, C., Bradbury, J., and Socher, R. (2017). *Pointer Sentinel Mi
 Wikimedia Foundation. Chinese Wikipedia dump `wikimedia/wikipedia`, config `20231101.zh`.
 
 ## Author
-Zhengyuan Liu^1^, Maria Nelyubina^1^, Andriy Myachykov^1^, Haoyun Zhang^1,*^
+Zhengyuan Liu<sup>1</sup>, Maria Nelyubina<sup>1</sup>, Andriy Myachykov<sup>1</sup>, Haoyun Zhang<sup>1,*</sup>
 
-^1^ Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau
+<sup>1</sup> Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau
