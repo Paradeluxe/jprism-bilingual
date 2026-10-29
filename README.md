@@ -2,13 +2,14 @@
 
 With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models were probed with **Chinese** J-lenses and **English** J-lenses.
 
-We have found that:
+The results could indicate:
 
-- **The lens has a preference for languages**, as each lens usually gives the larger share to the language it was fitted on.
-- **The model has a preference for languages**, as the lens fitted on the model's own language usually reads a purer share of it than the other lens does.
-- **The thinking has a preference for languages**, as a blackout usually falls on one lens while the other still reads.
-- **The thinking is semantic**, as the two pools overlap in meaning across the two fitted languages and a small minority of other languages.
-
+| Interpretation | Evidence |
+| --- | --- |
+| The lens has a preference for languages | Each lens usually gives the larger share to the language it was fitted on. |
+| The model has a preference for languages | The lens fitted on the model's own language usually reads a purer share of it than the other lens does. |
+| The thinking has a preference for languages | A blackout usually falls on one lens while the other still reads. |
+| The thinking is semantic | The two pools overlap in meaning across the two fitted languages and a small minority of other languages. |
 
 ## 1. Question
 
