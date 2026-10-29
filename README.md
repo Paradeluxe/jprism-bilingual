@@ -48,6 +48,19 @@ Both corpora are cut in stream order with the Qwen3-0.6B tokenizer. The Chinese 
 | P3 | `The capital of France is` | paris |
 | P4 | `Think of a sport: people kick a round ball into a net. The sport is` | football, soccer |
 
+## Measurement
+
+Each lens is read at the last position of the four probes on every scored layer, and the top-100 candidates of each pool are stored per (probe, layer) cell with the answer rank, scanned to depth 500. Probes and ranks are fixed in `src/measure/pilot_core.py`.
+
+| Reading | Definition |
+| --- | --- |
+| Hit@5, Hit@10 | Share of cells whose best rank for an answer-family token is at most 5 or 10. |
+| Language composition | Share of the pool in four bands: English, Chinese, other language, non-language. Han script counts as Chinese; Latin script counts as English unless the hub table marks the token a foreign word; other scripts count as other language; digits and symbols as non-language. |
+| Blackout | A top-5 pool with no language token in any slot. |
+| Overlap | Four measures between the two lenses at the same layer. Without order, the share of one list's tokens that find a partner on the other, taking the better of the two lists: cross-language counts identical or translated partners, within-language identical partners only. With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
+
+The overlap score uses a bilingual lexicon: [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages in both directions, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B translation hub for Chinese tokens outside MUSE, and a morphological strip so that a function word glued to a dictionary word still matches. Traditional and simplified forms are folded with [`opencc`](https://github.com/BYVoid/OpenCC). The tables are local and not in git; `src/analysis/bilingual_align.py` loads them.
+
 ## Pipeline
 
 Two lenses per model, one per corpus, measured on the same probes and audited per cell. The code is in `src/`; per-lens provenance is in `cards/`.
