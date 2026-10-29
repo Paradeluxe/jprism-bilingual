@@ -1,25 +1,25 @@
-# Thinks Like a Bilingual: Language Models Have Their Preferred Languages in the Global Workspace
+# J-Prism: Language Models Have Their Preferred Languages in the Global Workspace
 
-Technical report. Protocol `v1-full-gurnee` / `measurement-protocol=v1-full-gurnee pilot-4`.  
-Code and analyses: Zhengyuan Liu. The full author list is in the accompanying paper.  
-Status: manuscript in preparation (28 October 2026).  
-Repository: [jspace-bilingual-lens](https://github.com/Paradeluxe/jspace-bilingual-lens).
+## Results
+- The lens has a preference for languages, as each lens usually gives the larger share to the language it was fitted on.
+- The model has a preference for languages, as the lens fitted on the model's own language usually reads a purer share of it than the other lens does.
+- The thinking (hidden state) has a preference for languages, as a blackout usually falls on one lens while the other still reads.
+- The thinking (hidden state) is semantic but carried in language-specific forms, as the two pools overlap semantically regardless of order, mostly in the two fitted languages (one per lens), with a small minority of other-language tokens.
 
-- The fitting corpus moved the language of the readout in all eleven models, and each family kept a preference the other lens did not remove: Gemma pools stayed English through a Chinese-fit lens, and Qwen pools let Chinese through an English-fit lens, from 0.6B to 27B.
-- The two lenses placed the same concept at the same deep layers, and most of the overlap between their candidate lists was translations rather than repeated tokens.
-- Blackouts belonged to the lens rather than to the layer: the English-fit lens went dark while the Chinese-fit lens still read in 202 of 812 cells, against 45 in the reverse direction.
+
+
 
 ## 1. Question
 
 The global-workspace claim says that a language model maintains a late representation that can be read out as words. If that space were only a property of the weights, two lenses of the same model would verbalize the same probes in the same way. If the space also carries the language it was estimated on, the English-fitted lens and the Chinese-fitted lens will disagree: in which language the top of the readout sits, and in whether the answer token is near the top at all.
 
-| Held fixed | Allowed to vary |
-|---|---|
-| Model weights | Fitting corpus (English or Chinese) |
-| Window budget: 1,000 × 128 tokens | |
+| Held fixed                                       | Allowed to vary                                                          |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| Model weights                                    | Fitting corpus (English or Chinese)                                      |
+| Window budget: 1,000 × 128 tokens                | <br />                                                                   |
 | Tokenizer used to *cut* the windows (Qwen3-0.6B) | Each model re-tokenizes those windows with its own tokenizer at fit time |
-| Probe strings and answer families | |
-| Layer schedule, dtype, skip rule, scoring code | |
+| Probe strings and answer families                | <br />                                                                   |
+| Layer schedule, dtype, skip rule, scoring code   | <br />                                                                   |
 
 The corpus is the only intended difference between the two lenses of a pair. [`docs/CORPORA.md`](docs/CORPORA.md) and [`docs/PROTOCOL.md`](docs/PROTOCOL.md) record that claim. `src/measure/pilot_core.py` defines the probes and the ranks. Measurement scripts import it and do not reimplement it.
 
@@ -35,10 +35,10 @@ The first 16 token positions of each window are skipped (`skip_first=16`), so a 
 
 Both corpora live in [`corpora/`](corpora/). Build cards: [`corpora/CORPUS_CARD.md`](corpora/CORPUS_CARD.md), [`corpora/CORPUS_CARD_zhwiki.md`](corpora/CORPUS_CARD_zhwiki.md).
 
-| File | Source | Windows | sha256 |
-|---|---|---|---|
+| File                        | Source                                              | Windows     | sha256                                                             |
+| --------------------------- | --------------------------------------------------- | ----------- | ------------------------------------------------------------------ |
 | `wikitext_n1000_L128.jsonl` | `Salesforce/wikitext`, `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
-| `zhwiki_n1000_L128.jsonl` | `wikimedia/wikipedia`, `20231101.zh` | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
+| `zhwiki_n1000_L128.jsonl`   | `wikimedia/wikipedia`, `20231101.zh`                | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
 
 Shared build rules:
 
@@ -69,18 +69,18 @@ Quantization ladder. On the small models the bit-width series is GGUF `Q2_K`, `Q
 
 Four probes, fixed in `CLASSIC` inside `src/measure/pilot_core.py`. The primary answer list is what `rank_targets` scans. `honest_cues` also records Italy on the boot probe. That cue is separate from the rank target.
 
-| ID | Key | Prompt | Rank targets |
-|---|---|---|---|
-| P1 | `boot_currency` | `Fact: The currency used in the country shaped like a boot is` | euro, eur |
-| P2 | `spider_legs` | `The number of legs on the animal that spins webs is` | 8, eight |
-| P3 | `france_capital` | `The capital of France is` | paris |
-| P4 | `sport` | `Think of a sport: people kick a round ball into a net. The sport is` | football, soccer |
+| ID | Key              | Prompt                                                                | Rank targets     |
+| -- | ---------------- | --------------------------------------------------------------------- | ---------------- |
+| P1 | `boot_currency`  | `Fact: The currency used in the country shaped like a boot is`        | euro, eur        |
+| P2 | `spider_legs`    | `The number of legs on the animal that spins webs is`                 | 8, eight         |
+| P3 | `france_capital` | `The capital of France is`                                            | paris            |
+| P4 | `sport`          | `Think of a sport: people kick a round ball into a net. The sport is` | football, soccer |
 
 A match is a decoded token, stripped and lower-cased, equal to a target. The string `european` does not count as `euro`. Ranks are scanned to depth 500; past that the rank is missing.
 
-The unit of the main table is a cell: one probe at one layer, read at the last position (`pos=-1`). `pos=-2` is stored and kept out of the aggregate. Hit@5 / Hit@10 is the fraction of cells whose best target rank is at most 5 or 10. `j_rank` is that rank in the full vocabulary order induced by the lens. Candidate strings are stored to depth 100; the JSON field is still named `j_top5`. Hit@5 and Hit@10 come from `j_rank`, so storing a longer candidate list does not change them.
+The unit of the main table is a cell: one probe at one layer, read at the last position (`pos=-1`). `pos=-2` is stored and kept out of the aggregate. Hit\@5 / Hit\@10 is the fraction of cells whose best target rank is at most 5 or 10. `j_rank` is that rank in the full vocabulary order induced by the lens. Candidate strings are stored to depth 100; the JSON field is still named `j_top5`. Hit\@5 and Hit\@10 come from `j_rank`, so storing a longer candidate list does not change them.
 
-`model_hit5` is the model's own final-layer Hit@5 on the same four prompts. It does not depend on which lens is applied. A value of 0 means the tokenizer does not match. Each report also stores a 24-token greedy continuation. The continuation is excluded from the hit rate.
+`model_hit5` is the model's own final-layer Hit\@5 on the same four prompts. It does not depend on which lens is applied. A value of 0 means the tokenizer does not match. Each report also stores a 24-token greedy continuation. The continuation is excluded from the hit rate.
 
 The measurement entry point is `src/measure/measure_sicc.py`. It joins each `jlens_n1000_Lstep2_{wikitext,zhwiki}.pt` to the registry, applies the lens on CPU or GPU, and writes `MEAS_<tag>_<corpus>_raw.json` plus a short markdown summary. Cluster and local numbers are the same measurement because both import `pilot_core`.
 
@@ -90,13 +90,13 @@ Hit rate records whether the answer token is near the top. `src/analysis/bilingu
 
 Five scores, all independent of which list is written first:
 
-| Score | Definition |
-|---|---|
-| Language bias | (English tokens on the English list + Chinese tokens on the Chinese list) / $2x$ |
-| Semantic coverage | Fraction of language tokens on either list that have at least one semantic partner on the other |
-| Semantic density | Number of semantic pairs / $x^2$ |
-| Strict overlap | Multiset of identical strings, divided by $x$ |
-| Same-position strict / semantic | Share of aligned ranks that are string-identical, or string-identical or translations |
+| Score                           | Definition                                                                                      |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Language bias                   | (English tokens on the English list + Chinese tokens on the Chinese list) / $2x$                |
+| Semantic coverage               | Fraction of language tokens on either list that have at least one semantic partner on the other |
+| Semantic density                | Number of semantic pairs / $x^2$                                                                |
+| Strict overlap                  | Multiset of identical strings, divided by $x$                                                   |
+| Same-position strict / semantic | Share of aligned ranks that are string-identical, or string-identical or translations           |
 
 Semantic partners are string-identical after normalization, or translations. Translations come from a MUSE bilingual lexicon, an English-hub table of two-hop links, a frozen machine-translation hub for Chinese tokens outside the lexicon, and a small morphological strip (so that a function word glued to a dictionary word can still match). Strict overlap is always at most the semantic score. The resources are built by `make_bilingual_lexicon.py` and `make_mt_hub.py`.
 
@@ -109,7 +109,7 @@ Semantic partners are string-identical after normalization, or translations. Tra
 A rung has four states. The four are separate. A ladder that reports 100% by collapsing them has not reported the rung.
 
 1. Lens file. `jlens_n1000_Lstep2_<corpus>.pt` exists.
-2. Measurement. A Hit@5 / Hit@10 report exists for that lens.
+2. Measurement. A Hit\@5 / Hit\@10 report exists for that lens.
 3. Compliance. The number of prompts actually used meets the protocol ($N=1000$, skip rate at most 2%).
 4. Record. A fit card names the path, corpus sha256, dtype, VRAM, wall clock, and skips.
 
@@ -129,13 +129,13 @@ Fit-card track line. Use Section 4, the registry, and `FIT_CARD_qwen3-32b-fp8.NO
 
 On this machine the code, the experiment, and the manuscript sit in one working tree. Git tracks the code and this report. `experiment/` and `manuscript/` are on disk and listed in `.gitignore`.
 
-| Part | Path | In git |
-|---|---|---|
-| Code and this report | repository root, `src/`, `cards/`, `corpora/`, `docs/` | yes |
-| Lenses, measurements, lexicons, lab scripts | [`experiment/`](experiment/) | no |
-| Manuscript, figures, reviews | [`manuscript/`](manuscript/) | no |
+| Part                                        | Path                                                   | In git |
+| ------------------------------------------- | ------------------------------------------------------ | ------ |
+| Code and this report                        | repository root, `src/`, `cards/`, `corpora/`, `docs/` | yes    |
+| Lenses, measurements, lexicons, lab scripts | [`experiment/`](experiment/)                           | no     |
+| Manuscript, figures, reviews                | [`manuscript/`](manuscript/)                           | no     |
 
-`experiment/` is the former `jspace-qwen-exp` tree: `lenses/local` (about 31 GB of `.pt` files), `RESULT/MEASURE_SICC` (the raw Hit@5 / Hit@10 JSON), `fit_corpus/`, the bilingual lexicons, and the lab scripts. `manuscript/` is the former `paper-writing/projects/jspace-bilingual` tree, including `draft.md`, the October 2026 docx, `fig/`, and `refs/`.
+`experiment/` is the former `jspace-qwen-exp` tree: `lenses/local` (about 31 GB of `.pt` files), `RESULT/MEASURE_SICC` (the raw Hit\@5 / Hit\@10 JSON), `fit_corpus/`, the bilingual lexicons, and the lab scripts. `manuscript/` is the former `paper-writing/projects/jspace-bilingual` tree, including `draft.md`, the October 2026 docx, `fig/`, and `refs/`.
 
 The old paths are directory junctions, so existing absolute paths keep resolving:
 
@@ -149,25 +149,18 @@ The Jacobian-lens implementation is still [anthropics/jacobian-lens](https://git
 ## 10. Reproduce
 
 1. Install the upstream library:
-
    ```bash
    pip install -e "git+https://github.com/anthropics/jacobian-lens#egg=jlens"
    ```
-
 2. Fit one pair (one lens per corpus):
-
    ```bash
    python src/measure/run_fit_sicc.py --model qwen3-0.6b
    ```
-
 3. Measure:
-
    ```bash
    python src/measure/measure_sicc.py --only qwen3-0.6b
    ```
-
 4. Audit the four states:
-
    ```bash
    python src/audit/full_audit.py lenses/local RESULT/MEASURE_SICC
    ```
@@ -176,18 +169,18 @@ The quoted `pip` line matters: an unquoted `#egg=jlens` is a shell comment.
 
 ## 11. Repository map
 
-| Path | Role |
-|---|---|
-| [`src/measure/`](src/measure/) | Fit entry point and model registry (`run_fit_sicc.py`), measurement (`measure_sicc.py`), scoring lock (`pilot_core.py`) |
-| [`src/fit/`](src/fit/) | Single-GPU fit drivers |
-| [`src/audit/`](src/audit/) | Four-state audit, matrix diff, NaN quarantine, results page, comparability audit |
-| [`src/analysis/`](src/analysis/) | Corpus builders, tokenizer-window audits, bilingual alignment and HTML viewers, intervention |
-| [`corpora/`](corpora/) | The two fitting corpora |
-| [`cards/`](cards/) | One fit card per lens |
-| [`docs/PROTOCOL.md`](docs/PROTOCOL.md) | Locked measurement protocol |
-| [`docs/CORPORA.md`](docs/CORPORA.md) | Corpus provenance |
-| [`experiment/`](experiment/) | Local lenses, measurements, lexicons, and lab scripts (not in git) |
-| [`manuscript/`](manuscript/) | Local manuscript, figures, and reviews (not in git) |
+| Path                                   | Role                                                                                                                    |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [`src/measure/`](src/measure/)         | Fit entry point and model registry (`run_fit_sicc.py`), measurement (`measure_sicc.py`), scoring lock (`pilot_core.py`) |
+| [`src/fit/`](src/fit/)                 | Single-GPU fit drivers                                                                                                  |
+| [`src/audit/`](src/audit/)             | Four-state audit, matrix diff, NaN quarantine, results page, comparability audit                                        |
+| [`src/analysis/`](src/analysis/)       | Corpus builders, tokenizer-window audits, bilingual alignment and HTML viewers, intervention                            |
+| [`corpora/`](corpora/)                 | The two fitting corpora                                                                                                 |
+| [`cards/`](cards/)                     | One fit card per lens                                                                                                   |
+| [`docs/PROTOCOL.md`](docs/PROTOCOL.md) | Locked measurement protocol                                                                                             |
+| [`docs/CORPORA.md`](docs/CORPORA.md)   | Corpus provenance                                                                                                       |
+| [`experiment/`](experiment/)           | Local lenses, measurements, lexicons, and lab scripts (not in git)                                                      |
+| [`manuscript/`](manuscript/)           | Local manuscript, figures, and reviews (not in git)                                                                     |
 
 ## References
 
@@ -202,3 +195,7 @@ Wikimedia Foundation. Chinese Wikipedia dump `wikimedia/wikipedia`, config `2023
 Apache-2.0 covers everything in this repository. The upstream Jacobian-lens library is Anthropic's, also Apache-2.0, and is a declared dependency. The lens algorithm stays in that library.
 
 If you use the code, cite `CITATION.cff`.
+
+## Author
+
+Code and analyses: Zhengyuan Liu. The full author list is in the accompanying paper.
