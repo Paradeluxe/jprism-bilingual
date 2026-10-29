@@ -11,6 +11,20 @@ The results could indicate:
 | The thinking has a preference for languages | A blackout usually falls on one lens while the other still reads. |
 | The thinking is semantic | The two pools overlap in meaning across the two fitted languages and a small minority of other languages. |
 
+## Figures
+
+![Figure 1](figures/fig1_composition.png)
+
+**Figure 1.** Language composition of the candidate pools of both lenses. Currency probe at the last position, top-100 candidates; the four bands sum to one at every layer.
+
+![Figure 2](figures/fig2_overlap.png)
+
+**Figure 2.** Overlap between the candidate lists of the two lenses. Four measures per model on the currency probe at the last position, top-100 candidates.
+
+![Figure 3](figures/fig3_blackouts.png)
+
+**Figure 3.** Blackouts in five (model, probe) cells over three consecutive measured layers. Each bar gives the composition of that lens's top-100 pool; the ten highest-ranked candidates stand beside it.
+
 ## 1. Question
 
 The global-workspace claim says that a language model maintains a late representation that can be read out as words. If that space were only a property of the weights, two lenses of the same model would verbalize the same probes in the same way. If the space also carries the language it was estimated on, the English-fitted lens and the Chinese-fitted lens will disagree: in which language the top of the readout sits, and in whether the answer token is near the top at all.
