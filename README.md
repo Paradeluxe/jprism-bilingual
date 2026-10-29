@@ -94,9 +94,9 @@ Every row of the results table rests on the same cells: one probe at one layer, 
 
 | Reading | Supports | Definition |
 | --- | --- | --- |
-| Language shares | the lens and model rows | Share of a pool in four bands: English, Chinese, other language, non-language. Han is Chinese; Latin is English unless the hub table marks a foreign word; other scripts are other language; digits and symbols are non-language. |
-| Blackout | the blackout row | A top-5 pool with no language token. |
-| Overlap | the semantic row | Four measures at one layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
+| Language shares | the lens and model rows | Share of the top-100 pool in four bands: English, Chinese, other language, non-language. Han is Chinese; Latin is English unless the hub table marks a foreign word; other scripts are other language; digits and symbols are non-language. |
+| Blackout | the blackout row | No language token among a cell's first five slots. |
+| Overlap | the semantic row | Four measures on the same two top-100 lists at one layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
 
 Only language tokens are compared for overlap, and x is limited by the shorter list. Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
 
