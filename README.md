@@ -98,7 +98,7 @@ Each lens is read at the last position of the probes on every scored layer. One 
 
 | Reading | Definition |
 | --- | --- |
-| Hit@5, Hit@10 | Share of cells whose best answer rank is at most 5 or 10. |
+| Hit@5, Hit@10, Hit@100 | Share of cells whose best answer rank is at most k, for k = 5, 10, 100. |
 | Language composition | Share of the pool in four bands: English, Chinese, other language, non-language. Han is Chinese; Latin is English unless the hub table marks a foreign word; other scripts are other language; digits and symbols are non-language. |
 | Blackout | A top-5 pool with no language token. |
 | Overlap | Four measures at the same layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
