@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite it as below."
-title: "jspace-bilingual-lens: controlled comparison of English- and Chinese-fitted Jacobian lenses"
+title: "jprism-bilingual: controlled comparison of English- and Chinese-fitted Jacobian lenses"
 authors:
   - family-names: Liu
     given-names: Zhengyuan
 type: software
 license: Apache-2.0
-repository-code: "https://github.com/Paradeluxe/jspace-bilingual-lens"
+repository-code: "https://github.com/Paradeluxe/jprism-bilingual"
 keywords:
   - jacobian-lens
   - mechanistic-interpretability
