@@ -4,6 +4,16 @@ title: "jprism-bilingual: controlled comparison of English- and Chinese-fitted J
 authors:
   - family-names: Liu
     given-names: Zhengyuan
+    affiliation: "Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau"
+  - family-names: Nelyubina
+    given-names: Maria
+    affiliation: "Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau"
+  - family-names: Myachykov
+    given-names: Andriy
+    affiliation: "Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau"
+  - family-names: Zhang
+    given-names: Haoyun
+    affiliation: "Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau"
 type: software
 license: Apache-2.0
 repository-code: "https://github.com/Paradeluxe/jprism-bilingual"
@@ -17,4 +27,4 @@ abstract: >-
   Fitting, measurement, audit, and analysis code for a controlled comparison of
   Jacobian lenses fitted on English WikiText versus Chinese Wikipedia corpora,
   applied to the same models and the same probes. Depends on
-  anthropics/jacobian-lens (Apache-2.0).
+  anthropics/jacobian-lens (Apache-2.0). Corresponding author: Haoyun Zhang.

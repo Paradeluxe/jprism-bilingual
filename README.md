@@ -53,8 +53,3 @@ Gurnee, W., et al. (2026). *Verbalizable Representations Form a Global Workspace
 Merity, S., Xiong, C., Bradbury, J., and Socher, R. (2017). *Pointer Sentinel Mixture Models.* WikiText-103, used here as `Salesforce/wikitext`, config `wikitext-103-raw-v1`, train split.
 
 Wikimedia Foundation. Chinese Wikipedia dump `wikimedia/wikipedia`, config `20231101.zh`.
-
-## Author
-Zhengyuan Liu<sup>1</sup>, Maria Nelyubina<sup>1</sup>, Andriy Myachykov<sup>1</sup>, Haoyun Zhang<sup>1,*</sup>
-
-<sup>1</sup> Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau
