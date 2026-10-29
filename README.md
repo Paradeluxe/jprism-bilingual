@@ -92,7 +92,7 @@ Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [
 
 ### Readout
 
-Each lens is read at the last position of the probes on every scored layer. One cell is one probe at one layer; `pos=-2` is stored and kept out of the aggregate. Candidate strings are stored to depth 100, and `j_rank` is the answer rank in the lens's vocabulary order, scanned to depth 500. A match is a decoded token, stripped and lower-cased, equal to a rank target; `european` does not count as `euro`. The report also stores the model's own final-layer Hit@5 (`model_hit5`; 0 means the tokenizer does not match) and a 24-token greedy continuation, excluded from the hit rate. Each measurement writes `MEAS_<tag>_<corpus>_raw.json` and a markdown summary. Probes and ranks are fixed in `src/measure/pilot_core.py`, so cluster and local numbers are the same measurement.
+Each lens is read at the last position of the probes on every scored layer. One cell is one probe at one layer; `pos=-2` is stored and kept out of the aggregate. Candidate strings are stored for the top 100 tokens, and `j_rank` is the answer rank in the lens's vocabulary order, scanned to a depth of 500; past that the rank is missing. A match is a decoded token, stripped and lower-cased, equal to a rank target; `european` does not count as `euro`. The report also stores the model's own final-layer Hit@5 (`model_hit5`; 0 means the tokenizer does not match) and a 24-token greedy continuation, excluded from the hit rate. Each measurement writes `MEAS_<tag>_<corpus>_raw.json` and a markdown summary. Probes and ranks are fixed in `src/measure/pilot_core.py`, so cluster and local numbers are the same measurement.
 
 ### Readings
 
