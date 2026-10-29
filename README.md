@@ -25,14 +25,14 @@ The results could indicate:
 
 ## Materials
 
-Two lenses per checkpoint, one per corpus. The matrix behind the figures is 23 checkpoints (46 lenses); the repository also fits the small-model quantized variants as separate rungs, for 38 rungs and 76 lenses in total.
+One English lens and one Chinese lens per checkpoint. The figures use 23 checkpoints (46 lenses); the repository fits the small-model quantized variants as extra rungs, 38 in total (76 lenses).
 
 | Corpus | Source | Config | Windows | sha256 |
 | --- | --- | --- | --- | --- |
 | English | [`Salesforce/wikitext`](https://huggingface.co/datasets/Salesforce/wikitext) | `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
 | Chinese | [`wikimedia/wikipedia`](https://huggingface.co/datasets/wikimedia/wikipedia) | `20231101.zh` | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
 
-Both corpora are cut in stream order with the Qwen3-0.6B tokenizer. The Chinese build adds Han-ratio guards, and both drop any window that contains a probe string or a listed answer paraphrase. Each model re-tokenizes the decoded windows with its own tokenizer at fit time. The built files ship in [`corpora/`](corpora/), and both sources are Wikipedia-derived under CC BY-SA 3.0 and GFDL.
+Both sources are Wikipedia-derived, CC BY-SA 3.0 and GFDL. The built files ship in [`corpora/`](corpora/); each model re-tokenizes the decoded windows at fit time.
 
 | Family | Checkpoints | Layers | Precision |
 | --- | --- | --- | --- |
@@ -50,28 +50,28 @@ Both corpora are cut in stream order with the Qwen3-0.6B tokenizer. The Chinese 
 
 ## Measurement
 
-Each lens is read at the last position of the four probes on every scored layer, and the top-100 candidates of each pool are stored per (probe, layer) cell with the answer rank, scanned to depth 500. Probes and ranks are fixed in `src/measure/pilot_core.py`.
+Each lens is read at the last position of the four probes on every scored layer. The top-100 candidates of each pool are stored per (probe, layer) cell with the answer rank, scanned to depth 500; `src/measure/pilot_core.py` fixes probes and ranks.
 
 | Reading | Definition |
 | --- | --- |
-| Hit@5, Hit@10 | Share of cells whose best rank for an answer-family token is at most 5 or 10. |
-| Language composition | Share of the pool in four bands: English, Chinese, other language, non-language. Han script counts as Chinese; Latin script counts as English unless the hub table marks the token a foreign word; other scripts count as other language; digits and symbols as non-language. |
-| Blackout | A top-5 pool with no language token in any slot. |
-| Overlap | Four measures between the two lenses at the same layer. Without order, the share of one list's tokens that find a partner on the other, taking the better of the two lists: cross-language counts identical or translated partners, within-language identical partners only. With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
+| Hit@5, Hit@10 | Share of cells whose best answer rank is at most 5 or 10. |
+| Language composition | Share of the pool in four bands: English, Chinese, other language, non-language. Han is Chinese; Latin is English unless the hub table marks a foreign word; other scripts are other language; digits and symbols are non-language. |
+| Blackout | A top-5 pool with no language token. |
+| Overlap | Four measures at the same layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
 
-The overlap score uses a bilingual lexicon: [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages in both directions, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B translation hub for Chinese tokens outside MUSE, and a morphological strip so that a function word glued to a dictionary word still matches. Traditional and simplified forms are folded with [`opencc`](https://github.com/BYVoid/OpenCC). The tables are local and not in git; `src/analysis/bilingual_align.py` loads them.
+The overlap uses [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
 
 ## Pipeline
 
-Two lenses per model, one per corpus, measured on the same probes and audited per cell. The code is in `src/`; per-lens provenance is in `cards/`.
+One English lens and one Chinese lens per model, measured on the same probes and audited per cell. Code in `src/`; per-lens provenance in `cards/`.
 
-1. **Corpora.** Two corpora of 1,000 non-overlapping 128-token windows, cut in stream order with the Qwen3-0.6B tokenizer: English WikiText-103 and Chinese Wikipedia (`20231101.zh`). The Chinese build adds Han-ratio guards, and both drop any window that contains a probe string or a listed answer paraphrase.
-2. **Fit.** One lens per corpus per model, the Jacobian of the final-layer output with respect to an earlier residual stream, averaged over the 1,000 fitting windows in fp32 with every second source layer sampled. A prompt with a non-finite Jacobian is skipped, and a lens above 2% skips is refused. Entry point `src/measure/run_fit_sicc.py`; the registry in that file covers five families from 0.6B to 32B, with quantized variants as separate rungs.
-3. **Measure.** Each lens is applied to the same four English probes at the last position of every scored layer, and the top-100 candidates are stored per cell with the answer rank. Entry point `src/measure/measure_sicc.py`; probes and ranks are fixed in `src/measure/pilot_core.py`.
-4. **Score.** Hit@5 and Hit@10 per cell; the language composition of each pool (English, Chinese, other language, non-language); blackouts, a top-5 pool with no language token; and cross-language overlap, with and without order, over a bilingual lexicon (`src/analysis/bilingual_align.py`).
-5. **Audit.** `src/audit/full_audit.py` joins four states per (model, corpus): lens file, measurement, prompt compliance, and fit card. A rung counts only when all four hold.
+1. **Corpora.** 1,000 non-overlapping 128-token windows per corpus, cut in stream order with the Qwen3-0.6B tokenizer; the Chinese build adds Han-ratio guards, and both drop windows that contain a probe or a listed answer paraphrase.
+2. **Fit.** One lens per corpus per model, the Jacobian of the final-layer output with respect to an earlier residual stream, averaged over the 1,000 windows in fp32, sampling every second source layer. Prompts with a non-finite Jacobian are skipped; a lens above 2% skips is refused. Registry: `src/measure/run_fit_sicc.py`.
+3. **Measure.** Both lenses applied to the four probes at the last position of every scored layer; the readout is defined under Measurement. `src/measure/measure_sicc.py`.
+4. **Score.** Hit rates, language composition, blackouts and overlap, as defined under Measurement. `src/analysis/bilingual_align.py`.
+5. **Audit.** Four states per (model, corpus), joined by `src/audit/full_audit.py`: lens file, measurement, prompt compliance, fit card. A rung counts when all four hold.
 
-The fitted lenses and raw measurements are local (about 31 GB) and not in git; the code reproduces them from the corpora.
+Fitted lenses and raw measurements are local (about 31 GB) and not in git; the code rebuilds them from the corpora.
 
 ## Reproduce
 
