@@ -109,28 +109,63 @@ The overlap compares only language tokens, at depth x limited by the shorter lis
 
 ## Pipeline
 
-Code in `src/`; per-lens provenance in `cards/`.
+The corpora ship in [`corpora/`](corpora/), and probes and ranks are fixed in `src/measure/pilot_core.py`. Five stages take them to audited numbers. Commands run from the repository root and write into `--root` (default `src/measure/`, the scripts' own directory).
 
-1. **Corpora.** Windows cut in stream order with the Qwen3-0.6B tokenizer; the Chinese build adds Han-ratio guards, and both drop windows that contain a probe or a listed answer paraphrase.
-2. **Fit.** One lens per corpus per model, the Jacobian of the final-layer output with respect to an earlier residual stream, averaged over the 1,000 windows in fp32, sampling every second source layer. Prompts with a non-finite Jacobian are skipped; a lens above 2% skips is refused. Registry: `src/measure/run_fit_sicc.py`.
-3. **Measure.** Both lenses applied to the probes. `src/measure/measure_sicc.py`.
-4. **Score.** The readings defined under Measurement. `src/analysis/bilingual_align.py`.
-5. **Audit.** Four states per (model, corpus), joined by `src/audit/full_audit.py`: lens file, measurement, prompt compliance, fit card. A rung counts when all four hold.
+### Environment
 
-Fits ran on single-GPU nodes of the SICC cluster, NVIDIA H800 80 GB or A100 40 GB.
-
-Fitted lenses and raw measurements are local (about 31 GB) and not in git; the code rebuilds them from the corpora.
-
-## Reproduce
+Python 3.10+ with a CUDA build of PyTorch:
 
 ```bash
+python -m venv .venv
+. .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install torch --index-url https://download.pytorch.org/whl/cu124   # match your driver
 pip install -e "git+https://github.com/anthropics/jacobian-lens#egg=jlens"
-python src/measure/run_fit_sicc.py --model qwen3-0.6b
-python src/measure/measure_sicc.py --only qwen3-0.6b
-python src/audit/full_audit.py experiment/lenses/local experiment/RESULT/MEASURE_SICC
 ```
 
 The quoted `pip` line matters: an unquoted `#egg=jlens` is a shell comment.
+
+### Weights
+
+`MODELS` in `src/measure/run_fit_sicc.py` maps each checkpoint to `~/models/<Name>`. Download what you need there with the Hugging Face CLI; Gemma checkpoints need the licence accepted on the Hub first.
+
+```bash
+pip install "huggingface_hub[cli]"
+hf download Qwen/Qwen3-8B --local-dir ~/models/Qwen3-8B
+```
+
+Quantized variants follow the same layout, with GGUF files under `~/models/gguf/`; edit the `local` entry in `MODELS` if you keep weights elsewhere.
+
+### Fit
+
+One lens per corpus per model, one CUDA GPU per fit; our runs used an H800 80 GB or an A100 40 GB.
+
+```bash
+python src/measure/run_fit_sicc.py --model 8B --root data \
+    --corpus corpora/wikitext_n1000_L128.jsonl --corpus-tag wikitext
+python src/measure/run_fit_sicc.py --model 8B --root data \
+    --corpus corpora/zhwiki_n1000_L128.jsonl --corpus-tag zhwiki
+```
+
+This writes `data/lenses/local/qwen3-8b/jlens_n1000_Lstep2_{wikitext,zhwiki}.pt` and a fit card beside them; the cards for the full matrix are in [`cards/`](cards/). Prompts with a non-finite Jacobian are skipped; a fit above 2% skips is refused. Fits resume from `data/fit_ckpt/`. Add `--limit 20` for a quick `.smoke` fit, and repeat per checkpoint in `MODELS`.
+
+### Measure
+
+```bash
+python src/measure/measure_sicc.py --root data --only qwen3-8b --device cuda
+```
+
+Writes `data/RESULT/MEASURE_SICC/MEAS_<tag>_<corpus>_raw.json` plus a markdown summary. The cell, depth and match rules are the ones under Measurement.
+
+### Audit and readings
+
+```bash
+python src/audit/full_audit.py data/lenses/local data/RESULT/MEASURE_SICC
+python src/analysis/all_models_bilingual_html.py data/RESULT/MEASURE_SICC page.html
+```
+
+The first joins the four states per (model, corpus) and lists gaps; the second renders the paired readouts and the readings computed by `src/analysis/bilingual_align.py`. Both read only the raw JSON. The bilingual tables are not in git: `make_bilingual_lexicon.py` downloads the MUSE pairs, and `make_mt_hub.py` fills Chinese terms outside them from a local Qwen3.5-0.8B (set `MODEL_DIR` in that script).
+
+Fitted lenses and raw measurements are not in git; the full matrix is about 31 GB and is rebuilt from the shipped corpora.
 
 ## References
 
