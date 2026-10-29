@@ -90,9 +90,11 @@ Both sources are released under CC BY-SA 3.0 and GFDL; the built files ship in [
 
 ## Measurement
 
-### Readings
+### Readout
 
-Each lens is read at the last position of the four probes on every scored layer. The top-100 candidates of each pool are stored per (probe, layer) cell with the answer rank, scanned to depth 500; `src/measure/pilot_core.py` fixes probes and ranks.
+Each lens is read at the last position of the probes on every scored layer. One cell is one probe at one layer; `pos=-2` is stored and kept out of the aggregate. Candidate strings are stored to depth 100, and `j_rank` is the answer rank in the lens's vocabulary order, scanned to depth 500. A match is a decoded token, stripped and lower-cased, equal to a rank target; `european` does not count as `euro`. The report also stores the model's own final-layer Hit@5 (`model_hit5`; 0 means the tokenizer does not match) and a 24-token greedy continuation, excluded from the hit rate. Each measurement writes `MEAS_<tag>_<corpus>_raw.json` and a markdown summary. Probes and ranks are fixed in `src/measure/pilot_core.py`, so cluster and local numbers are the same measurement.
+
+### Readings
 
 | Reading | Definition |
 | --- | --- |
@@ -101,7 +103,9 @@ Each lens is read at the last position of the four probes on every scored layer.
 | Blackout | A top-5 pool with no language token. |
 | Overlap | Four measures at the same layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
 
-The overlap uses [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
+### Alignment
+
+The overlap compares only language tokens, at depth x limited by the shorter list. Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
 
 ## Pipeline
 
