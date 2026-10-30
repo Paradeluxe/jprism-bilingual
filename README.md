@@ -72,12 +72,12 @@ One English lens and one Chinese lens per row: the figures use 23 checkpoints (4
 
 ### Corpora
 
-| Corpus | Source | Config | Windows | sha256 |
+| Corpus | Source | Config | Windows | sha256 of built file |
 | --- | --- | --- | --- | --- |
 | English | [`Salesforce/wikitext`](https://huggingface.co/datasets/Salesforce/wikitext) | `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
 | Chinese | [`wikimedia/wikipedia`](https://huggingface.co/datasets/wikimedia/wikipedia) | `20231101.zh` | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
 
-Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [`corpora/`](corpora/), and the sha256 column is their digest. Each model re-tokenizes the decoded windows at fit time.
+Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [`corpora/`](corpora/). Each model re-tokenizes the decoded windows at fit time.
 
 ### Probes
 
@@ -99,9 +99,9 @@ The probes and ranks are fixed in `src/measure/pilot_core.py`.
 | Language composition | four bands | Share of the top-100 pool in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
 | Blackout | non-language share | Share of the top-100 slots in non-language tokens; a cell is black when it is above one half. |
 | Overlap | cross-language overlap, no order | Covered positions on the better side divided by x. A position is covered when its language token has an identical or translated partner on the other list. |
-| Overlap | cross-language overlap, ordered | Share of same-rank positions whose language tokens are identical or translations. |
-| Overlap | within-language overlap, no order | Covered positions on the better side divided by x, counting identical partners only. |
-| Overlap | within-language overlap, ordered | Share of same-rank positions whose language tokens are identical. |
+| | cross-language overlap, ordered | Share of same-rank positions whose language tokens are identical or translations. |
+| | within-language overlap, no order | Covered positions on the better side divided by x, counting identical partners only. |
+| | within-language overlap, ordered | Share of same-rank positions whose language tokens are identical. |
 
 Overlap rows count language tokens only, and x is the shorter of the two lists.
 
