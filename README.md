@@ -182,4 +182,6 @@ Wikimedia Foundation. Chinese Wikipedia dump `wikimedia/wikipedia`, config `2023
 
 ## Acknowledgement
 
+This work was conducted by **Zhengyuan Liu**, PhD student in **Prof. Haoyun Zhang**'s Lab, and **Maria Nelyubina**, PhD student in **Prof. Andriy Myachykov**'s Lab. All named contributors are affiliated with the Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau.
+
 This work was performed in part at SICC which is supported by IOTSC of the University of Macau.
