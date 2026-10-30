@@ -27,7 +27,7 @@ The results could indicate:
 
 ### Model matrix
 
-One English lens and one Chinese lens per row: the figures use 23 checkpoints (46 lenses), and the repository fits 38 rungs (76 lenses).
+One English lens and one Chinese lens per row: the figures use 23 checkpoints, and the repository fits every row.
 
 | Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -105,7 +105,7 @@ The probes and ranks are fixed in `src/measure/pilot_core.py`.
 
 Overlap rows count language tokens only, and x is the shorter of the two lists.
 
-Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
+Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms.
 
 ### Phenomena
 
@@ -170,9 +170,9 @@ python src/audit/full_audit.py data/lenses/local data/RESULT/MEASURE_SICC
 python src/analysis/all_models_bilingual_html.py data/RESULT/MEASURE_SICC page.html
 ```
 
-The first joins the four states per (model, corpus) and lists gaps; the second renders the paired readouts and the readings computed by `src/analysis/bilingual_align.py`. Both read only the raw JSON. The bilingual tables are not in git: `make_bilingual_lexicon.py` downloads the MUSE pairs, and `make_mt_hub.py` fills Chinese terms outside them from a local Qwen3.5-0.8B (set `MODEL_DIR` in that script).
+The first joins the four states per (model, corpus) and lists gaps; the second renders the paired readouts and the readings computed by `src/analysis/bilingual_align.py`. Both read only the raw JSON.
 
-Fitted lenses and raw measurements are not in git; the full matrix is about 31 GB and is rebuilt from the shipped corpora.
+Fitted lenses, raw measurements and the bilingual tables are not in git; the full matrix is about 31 GB and is rebuilt from the shipped corpora. `make_bilingual_lexicon.py` builds the MUSE pairs and `make_mt_hub.py` the Chinese terms outside them (set `MODEL_DIR` in that script).
 
 ## References
 
