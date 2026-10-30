@@ -1,8 +1,6 @@
 ## J-Prism: Language Models Think Semantically, with Preferred Languages
 
-With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models were probed with **Chinese** J-lenses and **English** J-lenses.
-
-The results could indicate:
+With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models were probed with **Chinese** J-lenses and **English** J-lenses. The results could indicate:
 
 | Interpretation | Evidence |
 | --- | --- |
@@ -10,6 +8,7 @@ The results could indicate:
 | The model has a preference for languages | The lens fitted on the model's own language usually reads a purer share of it than the other lens does. |
 | The thinking has a preference for languages | A blackout usually falls on one lens while the other still reads. |
 | The thinking is semantic | The two pools overlap in meaning across the two fitted languages and a small minority of other languages. |
+
 
 ![Figure 1](figures/fig1_composition.png)
 
@@ -109,7 +108,7 @@ Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries)
 
 | Phenomenon | Definition |
 | --- | --- |
-| Language preference | A language's share under the lens fitted on it compared with its share under the other lens. |
+| Language preference | The language a lens was fitted on takes the larger share, both against the other language in the same pool and against the same language under the other lens. |
 | Blackout | A cell whose non-language share is above one half. |
 | Semantic agreement | Matches that hold across the languages, translations included. |
 
