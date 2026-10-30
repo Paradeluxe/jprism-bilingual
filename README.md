@@ -92,13 +92,24 @@ Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [
 
 Every row of the results table rests on the same cells: one probe at one layer, read at the last position of both lenses, top-100 candidates.
 
-| Reading | Supports | Definition |
-| --- | --- | --- |
-| Language shares | the lens and model rows | Share of the top-100 pool in four bands: English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
-| Blackout | the blackout row | A cell whose top-100 pool holds more than half its slots in non-language tokens. |
-| Overlap | the semantic row | Four measures on the two top-100 lists at one layer: cross-language and within-language overlap, each counted with and without order. Cross-language pairs may be identical or translated; within-language pairs must be identical. Without order, the score is the share of the better list's tokens that find a partner at depth x. With order, it is the share of same-rank pairs that match. |
+### Method
 
-Only language tokens are compared for overlap, and x is limited by the shorter list. Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
+| Reading | Computation |
+| --- | --- |
+| Language composition | Share of the top-100 pool in four bands: English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
+| Blackout | The non-language share of the same pool, thresholded: a cell is black when that share is above one half. |
+| Overlap | Cross-language and within-language overlap of the two top-100 lists, over language tokens only, each counted with and without order. Without order, the score is the share of the better list's tokens that find a partner at depth x; with order, the share of same-rank pairs that match. Cross-language partners may be identical or translated, within-language partners must be identical, and x is limited by the shorter list. |
+
+Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
+
+### Phenomena
+
+| Phenomenon | Definition |
+| --- | --- |
+| Lens preference | The language a lens was fitted on takes the larger share of its pool. |
+| Model preference | The model's own language takes a larger share under the lens fitted on it than under the other lens. |
+| Blackout | One lens's pool is largely non-language while the other still reads at the same cell. |
+| Semantic agreement | The two pools name the same concepts whether or not the strings match. |
 
 ## Pipeline
 
