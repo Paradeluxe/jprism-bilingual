@@ -88,9 +88,9 @@ Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [
 | P3 | `The capital of France is` | paris |
 | P4 | `Think of a sport: people kick a round ball into a net. The sport is` | football, soccer |
 
-## Measurement
+The probes and ranks are fixed in `src/measure/pilot_core.py`.
 
-Every row of the results table rests on the same cells: one probe at one layer, read at the last position of both lenses, top-100 candidates.
+## Measurement
 
 ### Method
 
@@ -118,8 +118,6 @@ Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries)
 
 ## Pipeline
 
-The corpora ship in [`corpora/`](corpora/), and probes and ranks are fixed in `src/measure/pilot_core.py`. Five stages take them to audited numbers. Commands run from the repository root and write into `--root` (default `src/measure/`, the scripts' own directory).
-
 ### Environment
 
 Python 3.10+ with a CUDA build of PyTorch:
@@ -146,7 +144,7 @@ Quantized variants follow the same layout, with GGUF files under `~/models/gguf/
 
 ### Fit
 
-One lens per corpus per model, one CUDA GPU per fit; our runs used an H800 80 GB or an A100 40 GB.
+Commands run from the repository root and write into `--root` (default `src/measure/`). One lens per corpus per model, one CUDA GPU per fit; our runs used an H800 80 GB or an A100 40 GB.
 
 ```bash
 python src/measure/run_fit_sicc.py --model 8B --root data \
