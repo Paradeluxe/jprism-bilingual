@@ -109,8 +109,7 @@ Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries)
 
 | Phenomenon | Definition |
 | --- | --- |
-| Lens preference | A language's share under one lens compared with its share under the other. |
-| Model preference | The same comparison for the model's own language. |
+| Language preference | A language's share under the lens fitted on it compared with its share under the other lens. |
 | Blackout | A cell whose non-language share is above one half. |
 | Semantic agreement | Matches that hold across the languages, translations included. |
 
