@@ -94,15 +94,16 @@ Every row of the results table rests on the same cells: one probe at one layer, 
 
 ### Method
 
-| Term | Definition |
-| --- | --- |
-| Language composition | Share of the top-100 pool in four bands: English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
-| Coverage, cross-language | Covered positions on the better side divided by x. A position is covered when its language token has an identical or translated partner on the other list. |
-| Coverage, within-language | Covered positions on the better side divided by x, counting identical partners only. |
-| Rank agreement, cross-language | Share of same-rank positions whose language tokens are identical or translations. |
-| Rank agreement, within-language | Share of same-rank positions whose language tokens are identical. |
+| Reading | Measure | Definition |
+| --- | --- | --- |
+| Language composition | four bands | Share of the top-100 pool in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
+| Blackout | non-language share | Share of the top-100 slots in non-language tokens; a cell is black when it is above one half. |
+| Overlap | cross-language overlap, no order | Covered positions on the better side divided by x. A position is covered when its language token has an identical or translated partner on the other list. |
+| Overlap | cross-language overlap, ordered | Share of same-rank positions whose language tokens are identical or translations. |
+| Overlap | within-language overlap, no order | Covered positions on the better side divided by x, counting identical partners only. |
+| Overlap | within-language overlap, ordered | Share of same-rank positions whose language tokens are identical. |
 
-Coverage and rank agreement count language tokens only, and x is the shorter of the two lists.
+Overlap rows count language tokens only, and x is the shorter of the two lists.
 
 Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
 
@@ -112,7 +113,7 @@ Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries)
 | --- | --- |
 | Lens preference | The language a lens was fitted on takes the larger share of its composition. |
 | Model preference | The model's own language takes a larger share under the lens fitted on it than under the other lens. |
-| Blackout | One lens's non-language share is above one half while the other still reads at the same cell. |
+| Blackout | One lens is black while the other still reads at the same cell. |
 | Semantic agreement | The two lists share concepts, counting translations as matches. |
 
 ## Pipeline
