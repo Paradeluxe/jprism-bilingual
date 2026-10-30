@@ -7,7 +7,7 @@ With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models 
 | The lens has a preference for languages | Each lens usually gives the larger share to the language it was fitted on. |
 | The model has a preference for languages | The lens fitted on the model's own language usually reads a purer share of it than the other lens does. |
 | The thinking has a preference for languages | A blackout usually falls on one lens while the other still reads. |
-| The thinking is semantic | The two pools overlap in meaning across the two fitted languages and a small minority of other languages. |
+| The thinking is semantic | The two candidate lists overlap in meaning across the two fitted languages and a small minority of other languages. |
 
 
 ![Figure 1](figures/fig1_composition.png)
@@ -95,12 +95,12 @@ The probes and ranks are fixed in `src/measure/pilot_core.py`.
 
 | Reading | Measure | Definition |
 | --- | --- | --- |
-| Language composition | four bands | Share of the top-100 pool in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
-| Blackout | non-language share | Share of the top-100 slots in non-language tokens. |
-| Overlap | cross-language overlap, no order | Covered positions on the better side divided by x (the shorter of the two lists). A position is covered when its language token has an identical or translated partner on the other list. |
-| | cross-language overlap, ordered | Share of same-rank positions whose language tokens are identical or translations. |
-| | within-language overlap, no order | Covered positions on the better side divided by x, counting identical partners only. |
-| | within-language overlap, ordered | Share of same-rank positions whose language tokens are identical. |
+| Language composition | four bands | Share of the pool (one lens's top-100 candidates at one probe and layer) in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
+| Blackout | non-language share | Share of the pool in non-language tokens. |
+| Overlap | cross-language overlap, no order | Covered positions on the better side of the two pools, divided by x (the shorter pool). A position is covered when its language token has an identical or translated partner in the other pool. |
+| | cross-language overlap, ordered | Share of same-rank positions across the two pools whose language tokens are identical or translations. |
+| | within-language overlap, no order | Covered positions on the better side of the two pools, divided by x, counting identical partners only. |
+| | within-language overlap, ordered | Share of same-rank positions across the two pools whose language tokens are identical. |
 
 Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms.
 
@@ -110,7 +110,7 @@ Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries)
 | --- | --- |
 | Language preference of the lens | The share of a lens's fitted language, against the other language in the same pool. |
 | Language preference of the models | The share of the model's own language under the matching lens, against its share under the other lens. |
-| Blackout | A cell whose non-language share is above one half. |
+| Blackout | A pool whose non-language share is above one half. |
 | Semantic agreement | Matches that hold across the languages, translations included. |
 
 ## Pipeline
@@ -158,7 +158,7 @@ This writes `data/lenses/local/qwen3-8b/jlens_n1000_Lstep2_{wikitext,zhwiki}.pt`
 python src/measure/measure_sicc.py --root data --only qwen3-8b --device cuda
 ```
 
-Writes `data/RESULT/MEASURE_SICC/MEAS_<tag>_<corpus>_raw.json` plus a markdown summary. The cell, depth and match rules are the ones under Measurement.
+Writes `data/RESULT/MEASURE_SICC/MEAS_<tag>_<corpus>_raw.json` plus a markdown summary. The depth and match rules are the ones under Measurement.
 
 ### Audit and readings
 
