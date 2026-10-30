@@ -97,7 +97,7 @@ The probes and ranks are fixed in `src/measure/pilot_core.py`.
 | Reading | Measure | Definition |
 | --- | --- | --- |
 | Language composition | four bands | Share of the top-100 pool in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
-| Blackout | non-language share | Share of the top-100 slots in non-language tokens; a cell is black when it is above one half. |
+| Blackout | non-language share | Share of the top-100 slots in non-language tokens. |
 | Overlap | cross-language overlap, no order | Covered positions on the better side divided by x (the shorter of the two lists). A position is covered when its language token has an identical or translated partner on the other list. |
 | | cross-language overlap, ordered | Share of same-rank positions whose language tokens are identical or translations. |
 | | within-language overlap, no order | Covered positions on the better side divided by x, counting identical partners only. |
@@ -109,10 +109,10 @@ Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries)
 
 | Phenomenon | Definition |
 | --- | --- |
-| Lens preference | The language a lens was fitted on takes the larger share of its composition. |
-| Model preference | The model's own language takes a larger share under the lens fitted on it than under the other lens. |
-| Blackout | One lens is black while the other still reads at the same cell. |
-| Semantic agreement | The two lists share concepts, counting translations as matches. |
+| Lens preference | A language's share under one lens compared with its share under the other. |
+| Model preference | The same comparison for the model's own language. |
+| Blackout | A cell whose non-language share is above one half. |
+| Semantic agreement | Matches that hold across the languages, translations included. |
 
 ## Pipeline
 
@@ -168,7 +168,7 @@ python src/audit/full_audit.py data/lenses/local data/RESULT/MEASURE_SICC
 python src/analysis/all_models_bilingual_html.py data/RESULT/MEASURE_SICC page.html
 ```
 
-The first joins the four states per (model, corpus) and lists gaps; the second renders the paired readouts and the readings computed by `src/analysis/bilingual_align.py`. Both read only the raw JSON.
+The first checks four things per (model, corpus): a lens file, a measurement, a fit card and usable scores. It lists the gaps. The second renders the paired readouts and the readings computed by `src/analysis/bilingual_align.py`. Both read only the raw JSON.
 
 Fitted lenses, raw measurements and the bilingual tables are not in git; the full matrix is about 31 GB and is rebuilt from the shipped corpora. `make_bilingual_lexicon.py` builds the MUSE pairs and `make_mt_hub.py` the Chinese terms outside them (set `MODEL_DIR` in that script).
 
