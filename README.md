@@ -98,12 +98,10 @@ The probes and ranks are fixed in `src/measure/pilot_core.py`.
 | --- | --- | --- |
 | Language composition | four bands | Share of the top-100 pool in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
 | Blackout | non-language share | Share of the top-100 slots in non-language tokens; a cell is black when it is above one half. |
-| Overlap | cross-language overlap, no order | Covered positions on the better side divided by x. A position is covered when its language token has an identical or translated partner on the other list. |
+| Overlap | cross-language overlap, no order | Covered positions on the better side divided by x (the shorter of the two lists). A position is covered when its language token has an identical or translated partner on the other list. |
 | | cross-language overlap, ordered | Share of same-rank positions whose language tokens are identical or translations. |
 | | within-language overlap, no order | Covered positions on the better side divided by x, counting identical partners only. |
 | | within-language overlap, ordered | Share of same-rank positions whose language tokens are identical. |
-
-Overlap rows count language tokens only, and x is the shorter of the two lists.
 
 Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms.
 
@@ -144,7 +142,7 @@ Quantized variants follow the same layout, with GGUF files under `~/models/gguf/
 
 ### Fit
 
-Commands run from the repository root and write into `--root` (default `src/measure/`). One lens per corpus per model, one CUDA GPU per fit; our runs used an H800 80 GB or an A100 40 GB.
+Commands run from the repository root and write into `--root` (default `src/measure/`). One CUDA GPU per fit; our runs used an H800 80 GB or an A100 40 GB.
 
 ```bash
 python src/measure/run_fit_sicc.py --model 8B --root data \
