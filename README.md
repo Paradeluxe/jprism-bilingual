@@ -94,9 +94,9 @@ Every row of the results table rests on the same cells: one probe at one layer, 
 
 | Reading | Supports | Definition |
 | --- | --- | --- |
-| Language shares | the lens and model rows | Share of the top-100 pool in four bands: English, Chinese, other language, non-language. Han is Chinese; Latin is English unless the hub table marks a foreign word; other scripts are other language; digits and symbols are non-language. |
-| Blackout | the blackout row | A cell whose top-100 pool is more than half non-language. |
-| Overlap | the semantic row | Four measures on the same two top-100 lists at one layer. Without order, the better list's share of tokens that have a partner at depth x, counting identical or translated pairs (cross-language) or identical pairs only (within-language). With order, the share of same-rank pairs that are identical (within-language) or identical or translated (cross-language). |
+| Language shares | the lens and model rows | Share of the top-100 pool in four bands: English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
+| Blackout | the blackout row | A cell whose top-100 pool holds more than half its slots in non-language tokens. |
+| Overlap | the semantic row | Four measures on the two top-100 lists at one layer: cross-language and within-language overlap, each counted with and without order. Cross-language pairs may be identical or translated; within-language pairs must be identical. Without order, the score is the share of the better list's tokens that find a partner at depth x. With order, it is the share of same-rank pairs that match. |
 
 Only language tokens are compared for overlap, and x is limited by the shorter list. Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
 
