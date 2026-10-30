@@ -94,11 +94,16 @@ Every row of the results table rests on the same cells: one probe at one layer, 
 
 ### Method
 
-| Reading | Computation |
-| --- | --- |
-| Language composition | Share of the top-100 pool in four bands: English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
-| Blackout | The non-language share of the same pool, thresholded: a cell is black when that share is above one half. |
-| Overlap | Cross-language and within-language overlap of the two top-100 lists, over language tokens only, each counted with and without order. Without order, the score is the share of the better list's tokens that find a partner at depth x; with order, the share of same-rank pairs that match. Cross-language partners may be identical or translated, within-language partners must be identical, and x is limited by the shorter list. |
+| Reading | Measure | Computation |
+| --- | --- | --- |
+| Language composition | four bands | Share of the top-100 pool in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
+| Blackout | non-language share | A cell is black when more than half of its top-100 slots are non-language. |
+| Overlap | cross-language, without order | The larger covered count on either side, divided by x; a token is covered when it matches an identical or translated token on the other side. |
+| Overlap | cross-language, with order | Share of same-rank pairs that are identical or translations. |
+| Overlap | within-language, without order | The larger covered count on either side, divided by x; a token is covered when its string appears on the other side. |
+| Overlap | within-language, with order | Share of same-rank pairs that are identical. |
+
+Overlap rows count language tokens only, and x is the shorter of the two lists.
 
 Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms. Strict matches are a subset of the semantic ones. The tables are local, not in git; `src/analysis/bilingual_align.py` loads them.
 
