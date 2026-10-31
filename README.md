@@ -1,5 +1,7 @@
 ## J-Prism: Language Models Think Semantically, with Preferred Languages
 
+J-Prism (repository `jprism-bilingual`) fits Jacobian lenses on English WikiText and on Chinese Wikipedia, measures what each lens reads, and compares the two readings. A J-lens is the Jacobian of the final-layer output with respect to an intermediate layer, averaged over a fitting corpus of 1,000 sequences of 128 tokens. Code is in `src/`; the fit cards are in `cards/`, the built corpora in `corpora/`, and the fitting protocol and corpus rules in [`docs/PROTOCOL.md`](docs/PROTOCOL.md) and [`docs/CORPORA.md`](docs/CORPORA.md).
+
 With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models were probed with **Chinese** J-lenses and **English** J-lenses. The results could indicate:
 
 | Interpretation | Evidence |
@@ -178,8 +180,20 @@ Merity, S., Xiong, C., Bradbury, J., and Socher, R. (2017). *Pointer Sentinel Mi
 
 Wikimedia Foundation. Chinese Wikipedia dump `wikimedia/wikipedia`, config `20231101.zh`.
 
+## Citation
+
+If you use this code, please cite it as below:
+
+Liu, Z., Nelyubina, M., Myachykov, A., and Zhang, H. (2026). *jprism-bilingual: controlled comparison of English- and Chinese-fitted Jacobian lenses.* Software. <https://github.com/Paradeluxe/jprism-bilingual>
+
+The machine-readable record is in [`CITATION.cff`](CITATION.cff).
+
 ## Acknowledgement
 
-This work was conducted by **Zhengyuan Liu**, PhD student in **Prof. Haoyun Zhang**'s Lab, and **Maria Nelyubina**, PhD student in **Prof. Andriy Myachykov**'s Lab. All named contributors are affiliated with the Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau.
+This work was conducted by **Zhengyuan Liu**, PhD student of **Prof. Haoyun Zhang**'s Lab, and **Maria Nelyubina**, PhD student of **Prof. Andriy Myachykov**'s Lab. All named contributors are affiliated with the Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau.
 
 This work was performed in part at SICC which is supported by IOTSC of the University of Macau.
+
+## License
+
+The code in this repository is licensed under the [Apache License 2.0](LICENSE). The corpus files in [`corpora/`](corpora/) are redistributed under the licenses of their sources, CC BY-SA 3.0 and GFDL; see [Corpora](#corpora).
