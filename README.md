@@ -96,7 +96,7 @@ The probes and ranks are fixed in `src/measure/pilot_core.py`.
 | Reading | Measure | Definition |
 | --- | --- | --- |
 | Language composition | four bands | Share of the pool (one lens's top-100 candidates at one probe and layer) in English, Chinese, other language, non-language. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
-| Blackout | non-language share | Share of the pool in non-language tokens. |
+| | non-language share | The non-language band of the same composition. |
 | Overlap | cross-language overlap, no order | Covered positions on the better side of the two pools, divided by x (the shorter pool). A position is covered when its language token has an identical or translated partner in the other pool. |
 | | cross-language overlap, ordered | Share of same-rank positions across the two pools whose language tokens are identical or translations. |
 | | within-language overlap, no order | Covered positions on the better side of the two pools, divided by x, counting identical partners only. |
