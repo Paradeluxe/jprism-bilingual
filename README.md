@@ -89,9 +89,9 @@ Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [
 
 The probes and ranks are fixed in `src/measure/pilot_core.py`.
 
-## Measurement
+## Method
 
-### Method
+### Measurement
 
 | Reading | Measure | Definition |
 | --- | --- | --- |
