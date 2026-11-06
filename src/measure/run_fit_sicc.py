@@ -639,7 +639,7 @@ def main() -> None:
 
     lens_path = os.path.join(lens_dir, "jlens_n%d_Lstep%d_%s%s.pt" % (n_use, LAYER_STEP, CORPUS_TAG, suffix))
     ckpt_path = os.path.join(ckpt_dir, "fit_ckpt_n%d_Lstep%d_%s%s.pt" % (n_use, LAYER_STEP, CORPUS_TAG, suffix))
-    card_path = os.path.join(lens_dir, "FIT_CARD_%s%s.md" % (tag, suffix))
+    card_path = os.path.join(lens_dir, "FIT_CARD_%s.%s%s.md" % (tag, CORPUS_TAG, suffix))
 
     if os.path.isfile(lens_path):
         logger.info("lens already exists at %s — skip fit (delete to refit)", lens_path)
@@ -801,13 +801,6 @@ def main() -> None:
                    lens_path=lens_path, ckpt_path=ckpt_path, corpus_hash=corpus_hash,
                    fit_sec=fit_sec, n_prompts=lens.n_prompts, vram_peak_gb=vram_peak,
                    dim_batch=dim_batch, host=host, dtype_name=dtype_name)
-    if cfg.get("appendix"):
-        write_fit_card(os.path.join(lens_dir, "FIT_CARD_%s%s.md" % (tag, suffix)),
-                       model_key=args.model, cfg=cfg, model_path=model_path,
-                       n_layers=n_layers, d_model=d_model, source_layers=source_layers,
-                       lens_path=lens_path, ckpt_path=ckpt_path, corpus_hash=corpus_hash,
-                       fit_sec=fit_sec, n_prompts=lens.n_prompts, vram_peak_gb=vram_peak,
-                       dim_batch=dim_batch, host=host, dtype_name=dtype_name)
     logger.info("wrote %s", card_path)
 
 

@@ -5,8 +5,10 @@ Qwen3.5-0.8B 一次性翻译成英文（贪心解码），清洗后写成 `zh<TA
 bilingual_align 加载后并入 _HUBS —— 匹配仍是"翻译到英文空间后求交"的确定性查表。
 
 用法:
-  .venv/Scripts/python make_mt_hub.py                 # 全量 OOV 翻译
-  .venv/Scripts/python make_mt_hub.py --limit 20      # 只翻前 20 个高频（试跑）
+  python make_mt_hub.py                                   # 全量 OOV 翻译
+  python make_mt_hub.py --limit 20                        # 只翻前 20 个高频（试跑）
+  python make_mt_hub.py --meas data/RESULT/MEASURE_SICC   # 指到 measure_sicc.py 的输出目录
+  python make_mt_hub.py --model-dir ~/models/Qwen3.5-0.8B --device cpu
 """
 import glob
 import json
@@ -18,18 +20,43 @@ from collections import Counter
 import bilingual_align as A
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(HERE))
 OUT = os.path.join(HERE, "bilingual_mt_hub.tsv")
-MODEL_DIR = r"E:\huggingface_cache\hub\models--Qwen--Qwen3.5-0.8B\snapshots\2fc06364715b967f1860aea9cf38778875588b17"
 
-LIMIT = None
-if "--limit" in sys.argv:
-    LIMIT = int(sys.argv[sys.argv.index("--limit") + 1])
+
+def _arg(name, default=None):
+    return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else default
+
+
+LIMIT = int(_arg("--limit", 0)) or None
+
+# Where measure_sicc.py wrote MEAS_*_raw.json. The documented flow uses
+# `--root data`, so try that first, then the older HERE/RESULT layout.
+DEFAULT_MEAS = (
+    os.path.join(REPO, "data", "RESULT", "MEASURE_SICC"),
+    os.path.join(HERE, "RESULT", "MEASURE_SICC"),
+)
+MEAS_DIR = _arg("--meas") or next(
+    (p for p in DEFAULT_MEAS if os.path.isdir(p)), DEFAULT_MEAS[0])
+
+# Local path or Hub id of the small dense model used for the translation pass.
+MODEL_DIR = _arg("--model-dir") or os.environ.get(
+    "MT_HUB_MODEL", os.path.expanduser(os.path.join("~", "models", "Qwen3.5-0.8B")))
+DEVICE = _arg("--device", "auto")
+
+if any(a in ("-h", "--help") for a in sys.argv):
+    print(__doc__)
+    sys.exit(0)
 
 
 def collect_oov():
     """数据里出现过的全部中文 token，取当前无覆盖（词典/枢纽/剥离都不中）的。"""
     zh = Counter()
-    for path in glob.glob(os.path.join(HERE, "RESULT", "MEASURE_SICC", "MEAS_*_raw.json")):
+    paths = sorted(glob.glob(os.path.join(MEAS_DIR, "MEAS_*_raw.json")))
+    if not paths:
+        sys.exit(f"ERROR: no MEAS_*_raw.json under {MEAS_DIR}\n"
+                 f"pass --meas <dir>, or run measure_sicc.py --root data first")
+    for path in paths:
         m = re.match(r"MEAS_(.+?)_(wikitext|zhwiki)_raw\.json$", os.path.basename(path))
         if not m:
             continue
@@ -84,10 +111,24 @@ def main():
 
     from transformers import AutoModelForCausalLM, AutoTokenizer
     import torch
-    print("loading", MODEL_DIR)
+
+    device = DEVICE
+    if device == "auto":
+        if torch.cuda.is_available():
+            device = "cuda"
+        elif getattr(torch.backends, "mps", None) and torch.backends.mps.is_available():
+            device = "mps"
+        else:
+            device = "cpu"
+    dtype = (torch.bfloat16 if device == "cuda"
+             else torch.float16 if device == "mps" else torch.float32)
+    print(f"loading {MODEL_DIR} on {device}")
     tok = AutoTokenizer.from_pretrained(MODEL_DIR)
-    model = AutoModelForCausalLM.from_pretrained(MODEL_DIR, dtype=torch.bfloat16,
-                                                 device_map="cuda")
+    try:
+        model = AutoModelForCausalLM.from_pretrained(MODEL_DIR, dtype=dtype)
+    except TypeError:  # older transformers
+        model = AutoModelForCausalLM.from_pretrained(MODEL_DIR, torch_dtype=dtype)
+    model = model.to(device)
     model.eval()
 
     rows, samples = [], []
@@ -106,7 +147,7 @@ def main():
                      f"separated by commas. If it is a grammatical particle or has no "
                      f"English meaning, output NONE.\nChinese: {t}"}]
             text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-            ids = tok(text, return_tensors="pt").to("cuda")
+            ids = tok(text, return_tensors="pt").to(device)
             out = model.generate(**ids, max_new_tokens=24, do_sample=False,
                                  pad_token_id=tok.eos_token_id)
             gen = tok.decode(out[0][ids["input_ids"].shape[1]:], skip_special_tokens=True)

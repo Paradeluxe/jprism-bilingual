@@ -24,9 +24,9 @@ With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models 
 
 **Figure 3.** Blackouts in five (model, probe) cells over three consecutive measured layers. Each bar gives the composition of that lens's top-100 pool; the ten highest-ranked candidates stand beside it.
 
-## Materials
+## Preparations
 
-### Model matrix
+### Model list
 
 One English lens and one Chinese lens per row: the figures use 23 checkpoints, and the repository fits every row.
 

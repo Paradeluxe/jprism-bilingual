@@ -77,7 +77,9 @@ def load_measurements():
 
 def cards():
     have = set()
-    for p in glob.glob("FIT_CARD*.md") + glob.glob("RESULT/**/FIT_CARD*.md", recursive=True):
+    for p in (glob.glob("FIT_CARD*.md")
+              + glob.glob("RESULT/**/FIT_CARD*.md", recursive=True)
+              + glob.glob(os.path.join(LENS, "*", "FIT_CARD*.md"))):
         b = os.path.basename(p)
         m = re.match(r"FIT_CARD_(.+?)(?:\.(wikitext|zhwiki))?\.md$", b)
         if not m:
