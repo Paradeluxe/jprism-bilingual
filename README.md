@@ -24,6 +24,8 @@ With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models 
 
 **Figure 3.** Blackouts in five (model, probe) cells over three consecutive measured layers. Each bar gives the composition of that lens's top-100 pool; the ten highest-ranked candidates stand beside it.
 
+The sixty-three appendix figures — per-layer trajectories of both lenses at candidate depths 100, 5 and 10, plus the four overlap measures on the remaining three probes — are collected in [`docs/APPENDIX_FIGURES.md`](docs/APPENDIX_FIGURES.md).
+
 ## Preparations
 
 ### Model list
