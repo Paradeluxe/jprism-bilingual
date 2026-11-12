@@ -1,6 +1,6 @@
 # Appendix figures
 
-Figures A1–A63 of the manuscript *Thinks Like a Bilingual: Language Models Have Their Preferred Languages in the Global Workspace* (Liu, Nelyubina, Myachykov, Cambria & Zhang), reproduced from the submission file. Figure numbering follows the manuscript appendix. Each image is the 600-dpi render used in the manuscript, downsampled to 1800 px wide for the web.
+Figures A1–A63 of the manuscript *Thinks Like a Bilingual: Language Models Have Their Preferred Languages in the Global Workspace* (Liu, Nelyubina, Myachykov, Cambria & Zhang), reproduced from the submission file. Figure numbering follows the manuscript appendix. Each image is the full-resolution render used in the manuscript file, downsampled to 1800 px wide for the web.
 
 ## How to read the figures
 
