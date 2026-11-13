@@ -20,6 +20,16 @@ CLASSIC = [
      ["football", "soccer"], []),
 ]
 
+# Chinese prompt set used for the zh-prompt measurements: a hard translation of CLASSIC.
+# These are the exact strings recorded in every MEAS_*_zhprompt_raw.json. Additive only:
+# the locked scoring definitions above are unchanged.
+ZH_CLASSIC = [
+    ("boot_currency", "事实：形似靴子的国家所使用的货币是", ["欧元"], ["italy"]),
+    ("spider_legs", "会织网的动物身上的腿的数量是", ["8", "八"], []),
+    ("france_capital", "法国的首都是", ["巴黎"], []),
+    ("sport", "想一项运动：人们把一个圆球踢进网里。这项运动是", ["足球"], []),
+]
+
 # Dense mid + sample early/late from every-2 fitted set
 WANT_LAYERS = [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
 POSITIONS = [-1, -2]
