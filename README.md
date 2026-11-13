@@ -11,7 +11,7 @@ With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models 
 | The thinking has a preference for languages | A blackout usually falls on one lens while the other still reads. |
 | The thinking is semantic | The two candidate lists overlap in meaning across the two fitted languages and a small minority of other languages. |
 
-The probes are also asked in Chinese (`ZH_CLASSIC`, the hard translation of the four classic probes, recorded in `src/measure/pilot_core.py`). That second run keeps the models, the layers and both lenses fixed and changes only the language of the question; the three readings under it are in [Chinese probes](#chinese-probes), together with a re-test of the four interpretations.
+The probes are also asked in Chinese (`ZH_CLASSIC`, the hard translation of the four classic probes, recorded in `src/measure/pilot_core.py`). That second run keeps the models, the layers and both lenses fixed and changes only the language of the question; the three readings under it are in [Chinese probes](#chinese-probes).
 
 
 ![Figure 1](figures/fig1_composition.png)
@@ -44,20 +44,7 @@ The four probes were also asked in Chinese (`ZH_CLASSIC`, the hard translation u
 
 **Figure 6.** Blackouts under the Chinese probes, in five (model, probe) cells over three consecutive measured layers, in the layout of Figure 3. The one-sided pattern survives the change of prompt language: the English-fitted lens goes dark at all fifteen layers (non-language share 0.66-1.00) while the Chinese-fitted lens keeps proposing readable candidates throughout (0.00-0.59).
 
-### What the prompt-language control adds
-
-All four interpretations are re-tested on the same 23 checkpoints, with the definitions above; only the language of the probe changes. The first two rows use the deep half at candidate depth 100, the blackout row uses every (probe, layer) cell, the overlap row uses the deep half at depth 100.
-
-| Reading | English probes | Chinese probes |
-| --- | --- | --- |
-| The lens has a preference for languages | fitted language above the other language band: EN lens 23/23, ZH lens 11/23 | EN lens 5/23, ZH lens 23/23 |
-| The model has a preference for languages | Qwen reads Chinese through the EN lens (deep mean 0.08, range 0.04–0.19); Gemma keeps an English majority under the ZH lens (0.57–0.70, Chinese at most 0.22) | Qwen 0.40; Gemma's English majority disappears (English 0.18–0.21, Chinese 0.46–0.52) |
-| The thinking has a preference for languages | exactly one lens dark in 24% of cells, 13:1 toward the English-fitted lens | 26%, 40:1 the same way |
-| The thinking is semantic | translation-aware overlap 0.519 against 0.461 same-string (gap +0.058) | 0.538 against 0.494 (gap +0.043) |
-
-Two readings move with the probe language and two do not. The lens-side preference survives only for the lens that matches the probe language: under the English probes the Chinese-fitted lens keeps its own band above the other language band in 11 of 23 checkpoints, and under the Chinese probes the English-fitted lens does so in 5 of 23 — the other lens gives its band up to the language of the question. The model-side preference is likewise probe-conditional: Gemma holds an English majority under the Chinese-fitted lens when the question is English and loses it when the question is Chinese. The blackout asymmetry and the translation-carried overlap do survive: blackouts stay a one-lens phenomenon that falls on the English-fitted lens, and the semantic-minus-identity gap stays positive, shrinking from 0.058 to 0.043.
-
-The comparison carries two caveats. The English-probe measurements were taken in October and the Chinese-probe measurements in November; the lens files are the same, but run-to-run differences are uncontrolled. And the 23 checkpoints are not 23 independent architectures: the Qwen3-0.6B row alone contributes seven quantized variants.
+Taken with Figures 4–6, the Chinese probes repeat the two robust observations of the English probes: the candidate lists overlap through translations more than through shared strings, and blackouts fall on the English-fitted lens while the Chinese-fitted lens keeps reading. The composition of each pool, by contrast, moves with the language of the probe.
 
 ## Preparations
 
