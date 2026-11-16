@@ -2,6 +2,8 @@
 
 J-Prism (repository `jprism-bilingual`) fits Jacobian lenses on English WikiText and on Chinese Wikipedia, measures what each lens reads, and compares the two readings. A J-lens is the Jacobian of the final-layer output with respect to an intermediate layer, averaged over a fitting corpus of 1,000 sequences of 128 tokens. Code is in `src/`; the fit cards are in `cards/`, the built corpora in `corpora/`, and the fitting protocol and corpus rules in [`docs/PROTOCOL.md`](docs/PROTOCOL.md) and [`docs/CORPORA.md`](docs/CORPORA.md).
 
+## What have we found
+
 With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models were probed with **Chinese** J-lenses and **English** J-lenses. The results could indicate:
 
 | Interpretation | Evidence |
