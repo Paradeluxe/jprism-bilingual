@@ -1,0 +1,5 @@
+# Inserts the jspace dashboard bundle. The visible dashboard tab lives in the
+# Client half (client.js); the Host row is a no-op that makes the package active.
+- insert:
+    - id: '@dsh-local/view-51901211-6038-40f3-8878-edd2998f1732:jspace-dashboard'
+      name: '@dsh-local/view-51901211-6038-40f3-8878-edd2998f1732'

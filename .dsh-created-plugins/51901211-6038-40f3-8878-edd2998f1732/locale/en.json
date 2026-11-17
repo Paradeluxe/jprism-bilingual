@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "jspace dashboard",
+    "description": "A resident Right Sidebar tab that embeds the live jspace lens-experiment dashboard served at 127.0.0.1:8904 and shows \"8904 is not running\" when the service is down."
+  }
+}

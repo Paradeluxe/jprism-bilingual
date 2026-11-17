@@ -1,10 +1,10 @@
 ## J-Prism: Language Models Think Semantically, with Preferred Languages
 
-J-Prism (repository `jprism-bilingual`) fits Jacobian lenses on English WikiText and on Chinese Wikipedia, measures what each lens reads, and compares the two readings. A J-lens is the Jacobian of the final-layer output with respect to an intermediate layer, averaged over a fitting corpus of 1,000 sequences of 128 tokens. Code is in `src/`; the fit cards are in `cards/`, the built corpora in `corpora/`, and the fitting protocol and corpus rules in [`docs/PROTOCOL.md`](docs/PROTOCOL.md) and [`docs/CORPORA.md`](docs/CORPORA.md).
+Project J-Prism fits Jacobian lenses on English, Chinese, and Russian materials, measures what each lens reads, and compares the three readings. A J-lens is the Jacobian of the final-layer output with respect to an intermediate layer, averaged over a fitting corpus of 1,000 sequences of 128 tokens. 
 
 ## What have we found
 
-With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models were probed with **Chinese** J-lenses and **English** J-lenses. The results could indicate:
+With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models were probed with **Chinese**, **English** and **Russian** J-lenses. The results could indicate:
 
 | Interpretation | Evidence |
 | --- | --- |
@@ -12,8 +12,6 @@ With the exact same **prompt**, **model**, and **layer**, Qwen and Gemma models 
 | The model has a preference for languages | The lens fitted on the model's own language usually reads a purer share of it than the other lens does. |
 | The thinking has a preference for languages | A blackout usually falls on one lens while the other still reads. |
 | The thinking is semantic | The two candidate lists overlap in meaning across the two fitted languages and a small minority of other languages. |
-
-The probes are also asked in Chinese (`ZH_CLASSIC`, the hard translation of the four classic probes, recorded in `src/measure/pilot_core.py`). That second run keeps the models, the layers and both lenses fixed and changes only the language of the question; the three readings under it are in [Chinese probes](#chinese-probes).
 
 
 ![Figure 1](figures/fig1_composition.png)
@@ -48,11 +46,8 @@ The four probes were also asked in Chinese (`ZH_CLASSIC`, the hard translation u
 
 Taken with Figures 4–6, the Chinese probes repeat the two robust observations of the English probes: the candidate lists overlap through translations more than through shared strings, and blackouts fall on the English-fitted lens while the Chinese-fitted lens keeps reading. The composition of each pool, by contrast, moves with the language of the probe.
 
-## Preparations
-
+## Method
 ### Model list
-
-One English lens and one Chinese lens per row: the figures use 23 checkpoints, and the repository fits every row.
 
 | Family | Checkpoint | Params | Layers | d_model | Attention | Weights |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -94,16 +89,12 @@ One English lens and one Chinese lens per row: the figures use 23 checkpoints, a
 | Gemma-4 | Gemma-4-E2B | E2B | 35 | 1536 | — | bf16 |
 | | Gemma-4-E4B | E4B | 42 | 2560 | — | bf16 |
 | | Gemma-4-12B | 12B | 48 | 3840 | — | bf16 |
-
 ### Corpora
 
 | Corpus | Source | Config | Windows | sha256 of built file |
 | --- | --- | --- | --- | --- |
 | English | [`Salesforce/wikitext`](https://huggingface.co/datasets/Salesforce/wikitext) | `wikitext-103-raw-v1`, train | 1,000 × 128 | `dacf54ddf125c2d906e0b5634cfc95972decc75a0843933d1fb2aad2795a21ee` |
 | Chinese | [`wikimedia/wikipedia`](https://huggingface.co/datasets/wikimedia/wikipedia) | `20231101.zh` | 1,000 × 128 | `f1b108c43abbabb1acc5c44ae18633b1daebe657b9f44aa393548974cbbd2792` |
-
-Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [`corpora/`](corpora/). Each model re-tokenizes the decoded windows at fit time.
-
 ### Probes
 
 | Probe | Prompt | Prompt (Chinese) | Rank targets |
@@ -112,89 +103,33 @@ Both sources are released under CC BY-SA 3.0 and GFDL. The built files ship in [
 | P2 | `The number of legs on the animal that spins webs is` | `会织网的动物身上的腿的数量是` | 8, eight / 八 |
 | P3 | `The capital of France is` | `法国的首都是` | paris / 巴黎 |
 | P4 | `Think of a sport: people kick a round ball into a net. The sport is` | `想一项运动：人们把一个圆球踢进网里。这项运动是` | football, soccer / 足球 |
-
-The English probes and ranks are fixed in `src/measure/pilot_core.py` (`CLASSIC`); the Chinese translations are recorded there as `ZH_CLASSIC` and are the prompts used for the Chinese-probe measurements.
-
-## Method
-
-### Measurement
-
-| Reading | Measure | Definition |
-| --- | --- | --- |
-| Language composition | four bands | Share of the pool (one lens's top-100 candidates at one probe and layer) in four bands: English, Chinese, other language, non-language. A band is the share of the language it names, and the non-language band is the non-language share. A token with a Han character counts as Chinese. A Latin-script token counts as English unless the hub table marks it a foreign word. Other scripts count as other language, and digits and symbols count as non-language. |
-| Overlap | cross-language overlap, no order | Covered positions on the better side of the two pools, divided by x (the shorter pool). A position is covered when its language token has an identical or translated partner in the other pool. |
-| | cross-language overlap, ordered | Share of same-rank positions across the two pools whose language tokens are identical or translations. |
-| | within-language overlap, no order | Covered positions on the better side of the two pools, divided by x, counting identical partners only. |
-| | within-language overlap, ordered | Share of same-rank positions across the two pools whose language tokens are identical. |
-
-Partners come from [`MUSE`](https://dl.fbaipublicfiles.com/arrival/dictionaries) dictionaries for ten languages both ways, an English-hub table for two-hop pairs, a frozen Qwen3.5-0.8B hub for Chinese tokens outside MUSE, and a morphological strip; [`opencc`](https://github.com/BYVoid/OpenCC) folds traditional and simplified forms.
-
 ### Phenomena
 
-| Phenomenon | Definition |
-| --- | --- |
-| Language preference of the lens | The share of a lens's fitted language, against the other language in the same pool. |
-| Language preference of the models | The share of the model's own language under the matching lens, against its share under the other lens. |
-| Blackout | A pool that is unreadable at the depth a user would consult *and* majority non-lexical: none of the ten highest-ranked candidates contains a letter, and the non-language share of the hundred highest-ranked candidates is at least one half. The first condition says the readout fails where it is read; the second says the pool itself is degraded, not just badly ordered. |
-| Semantic agreement | Matches that hold across the languages, translations included. |
+| Category | Variable | Level | Operational definition |
+| --- | --- | --- | --- |
+| language share | average language share | model | The share of the J-lens top-100 candidates, averaged over the measured layers. |
+| blackout | average blackout | model | The proportion of measured layers at which the lens is dark, i.e. all of its top-10 candidates, and more than 50% of its top-100 candidates carry non-language tokens. |
+|  | single-lens blackout | layer | The proportion of layers at which exactly one of the three lenses is dark and the other two read. |
+|  | single-lens lucidity | layer | The proportion of layers at which exactly one of the three lenses is not dark and the other two are dark. |
+| semantic overlap | cross-language overlap without order | three lenses | The share of the three lenses' top-100 candidates that correspond to at least one candidate in each of the other two lists (identical strings or translation-linked). |
+|  | cross-language overlap with order | three lenses | The share of ranks at which all three lenses place corresponding candidates. |
+|  | within-language overlap without order | three lenses | The share of identical strings common to all three lists. |
+|  | within-language overlap with order | three lenses | The share of ranks at which all three lenses place the identical string. |
 
-## Pipeline
+### Statistical analysis
 
-### Environment
+Each model was analysed separately at the item level, with item (the 300 probes) as a random intercept and prompt language (EN, ZH, RU) × lens language (EN, ZH, RU) as fixed factors. Every share is a **top-100** pool share, averaged over the measured step-2 layers with layer 0 excluded; it is not a top-5 or top-10 share.
 
-Python 3.10+ with a CUDA build of PyTorch:
+Three groups of dependent variables were used: the four language shares; the blackout rates (pool blackout, single blackout and single survivor); and four three-lens overlap measures (cross-language vs identical-string, unordered and ordered, each requiring agreement among all three lenses). The generic models were (the asterisk denotes a full model, i.e. both main effects and their interaction; `(1 | Probe)` is a random intercept for the 300 probes):
 
-```bash
-python -m venv .venv
-. .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install torch --index-url https://download.pytorch.org/whl/cu124   # match your driver
-pip install -e "git+https://github.com/anthropics/jacobian-lens#egg=jlens"
+```
+LanguageShare   ~ PromptLanguage * LensLanguage + (1 | Probe)
+BlackoutRate    ~ PromptLanguage * LensLanguage + (1 | Probe)
+SemanticOverlap ~ PromptLanguage + (1 | Probe)
 ```
 
-The quoted `pip` line matters: an unquoted `#egg=jlens` is a shell comment.
+LanguageShare is the top-100 language share, arcsine-square-root transformed before the linear mixed model was fitted; BlackoutRate and SemanticOverlap are proportions modelled as binomial counts with a logit link. The overlap model contains prompt language as the only fixed factor because the three lenses are combined by construction. Simple effects were tested with joint tests of prompt language within each lens level and of lens language within each prompt level, followed by Bonferroni pairwise contrasts; Holm correction within a dependent variable changed no inference. Models were fitted in R with lme4 and lmerTest (Satterthwaite degrees of freedom), with car and emmeans for tests and contrasts, called from Python through rpy2 and ezlmm. The overlap analyses are descriptive: no randomised baseline was computed.
 
-### Weights
-
-`MODELS` in `src/measure/run_fit_sicc.py` maps each checkpoint to `~/models/<Name>`. Download what you need there with the Hugging Face CLI; Gemma checkpoints need the licence accepted on the Hub first.
-
-```bash
-pip install "huggingface_hub[cli]"
-hf download Qwen/Qwen3-8B --local-dir ~/models/Qwen3-8B
-```
-
-Quantized variants follow the same layout, with GGUF files under `~/models/gguf/`; edit the `local` entry in `MODELS` if you keep weights elsewhere.
-
-### Fit
-
-Commands run from the repository root and write into `--root` (default `src/measure/`). One CUDA GPU per fit; our runs used an H800 80 GB or an A100 40 GB.
-
-```bash
-python src/measure/run_fit_sicc.py --model 8B --root data \
-    --corpus corpora/wikitext_n1000_L128.jsonl --corpus-tag wikitext
-python src/measure/run_fit_sicc.py --model 8B --root data \
-    --corpus corpora/zhwiki_n1000_L128.jsonl --corpus-tag zhwiki
-```
-
-This writes `data/lenses/local/qwen3-8b/jlens_n1000_Lstep2_{wikitext,zhwiki}.pt` and a fit card beside them; the cards for the full matrix are in [`cards/`](cards/). Prompts with a non-finite Jacobian are skipped; a fit above 2% skips is refused. Fits resume from `data/fit_ckpt/`. Add `--limit 20` for a quick `.smoke` fit, and repeat per checkpoint in `MODELS`.
-
-### Measure
-
-```bash
-python src/measure/measure_sicc.py --root data --only qwen3-8b --device cuda
-```
-
-Writes `data/RESULT/MEASURE_SICC/MEAS_<tag>_<corpus>_raw.json` plus a markdown summary. The depth and match rules are the ones under Measurement.
-
-### Audit and readings
-
-```bash
-python src/audit/full_audit.py data/lenses/local data/RESULT/MEASURE_SICC
-python src/analysis/all_models_bilingual_html.py data/RESULT/MEASURE_SICC page.html
-```
-
-The first checks four things per (model, corpus): a lens file, a measurement, a fit card and usable scores. It lists the gaps. The second renders the paired readouts and the readings computed by `src/analysis/bilingual_align.py`. Both read only the raw JSON.
-
-Fitted lenses, raw measurements and the bilingual tables are not in git; the full matrix is about 31 GB and is rebuilt from the shipped corpora. `make_bilingual_lexicon.py` builds the MUSE pairs and `make_mt_hub.py` the Chinese terms outside them (set `MODEL_DIR` in that script).
 
 ## References
 
@@ -217,7 +152,3 @@ The machine-readable record is in [`CITATION.cff`](CITATION.cff).
 This work was conducted by **Zhengyuan Liu**, PhD student of **Prof. Haoyun Zhang**'s Lab, and **Maria Nelyubina**, PhD student of **Prof. Andriy Myachykov**'s Lab. All named contributors are affiliated with the Centre for Cognitive and Brain Sciences, Institute of Artificial Intelligence and Brain Sciences, University of Macau.
 
 This work was performed in part at SICC which is supported by IOTSC of the University of Macau.
-
-## License
-
-The code in this repository is licensed under the [Apache License 2.0](LICENSE). The corpus files in [`corpora/`](corpora/) are redistributed under the licenses of their sources, CC BY-SA 3.0 and GFDL; see [Corpora](#corpora).
