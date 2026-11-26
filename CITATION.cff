@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite it as below."
-title: "jprism-bilingual: controlled comparison of English- and Chinese-fitted Jacobian lenses"
+title: "jprism-bilingual: English-, Chinese- and Russian-fitted Jacobian lenses across thirteen checkpoints"
 authors:
   - family-names: Liu
     given-names: Zhengyuan
@@ -25,6 +25,7 @@ keywords:
   - bilingualism
 abstract: >-
   Fitting, measurement, audit, and analysis code for a controlled comparison of
-  Jacobian lenses fitted on English WikiText versus Chinese Wikipedia corpora,
-  applied to the same models and the same probes. Depends on
+  Jacobian lenses fitted on English WikiText, Chinese Wikipedia and Russian
+  Wikipedia corpora, applied to thirteen checkpoints from five model families
+  (0.6B to 27B parameters) on 300 probes asked in all three languages. Depends on
   anthropics/jacobian-lens (Apache-2.0). Corresponding author: Haoyun Zhang.

@@ -1,0 +1,6 @@
+- insert:
+    - id: fig-layout
+      name: '@local/dsh-fig-layout'
+      config:
+        root: E:/hermes_playground/jspace-repo
+        port: 8829

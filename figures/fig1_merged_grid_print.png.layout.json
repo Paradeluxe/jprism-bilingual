@@ -1,0 +1,1423 @@
+{
+ "image": {
+  "width": 3638,
+  "height": 6749
+ },
+ "pad": 96,
+ "zones": [
+  {
+   "kind": "title-gap",
+   "label": "Space under the family title",
+   "tokens": [
+    "TITLE_GAP"
+   ],
+   "box": [
+    355.0,
+    154.0,
+    1545.6,
+    32.0
+   ]
+  },
+  {
+   "kind": "head-gap",
+   "label": "Space under the family rule",
+   "tokens": [
+    "HEAD_GAP"
+   ],
+   "box": [
+    355.0,
+    190.0,
+    1545.6,
+    76.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    590.0,
+    316.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    858.0,
+    316.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    355.0,
+    1190.0,
+    316.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    1522.0,
+    316.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    1790.0,
+    316.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    355.0,
+    2122.0,
+    316.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    2454.0,
+    316.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    2722.0,
+    316.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "panel-gap",
+   "label": "Between checkpoints",
+   "tokens": [
+    "MGAP"
+   ],
+   "box": [
+    671.8,
+    386.0,
+    128.0,
+    2668.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    799.8,
+    590.0,
+    393.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    799.8,
+    858.0,
+    393.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    799.8,
+    1190.0,
+    393.6,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    799.8,
+    1522.0,
+    393.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    799.8,
+    1790.0,
+    393.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    799.8,
+    2122.0,
+    393.6,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    799.8,
+    2454.0,
+    393.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    799.8,
+    2722.0,
+    393.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "panel-gap",
+   "label": "Between checkpoints",
+   "tokens": [
+    "MGAP"
+   ],
+   "box": [
+    1193.4,
+    386.0,
+    128.0,
+    2668.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1321.4,
+    590.0,
+    451.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1321.4,
+    858.0,
+    451.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    1321.4,
+    1190.0,
+    451.2,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1321.4,
+    1522.0,
+    451.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1321.4,
+    1790.0,
+    451.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    1321.4,
+    2122.0,
+    451.2,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1321.4,
+    2454.0,
+    451.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1321.4,
+    2722.0,
+    451.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "family-gap",
+   "label": "Between families",
+   "tokens": [
+    "FGAP"
+   ],
+   "box": [
+    1900.6,
+    186.0,
+    288.0,
+    2904.0
+   ]
+  },
+  {
+   "kind": "title-gap",
+   "label": "Space under the family title",
+   "tokens": [
+    "TITLE_GAP"
+   ],
+   "box": [
+    2188.6,
+    154.0,
+    1353.6,
+    32.0
+   ]
+  },
+  {
+   "kind": "head-gap",
+   "label": "Space under the family rule",
+   "tokens": [
+    "HEAD_GAP"
+   ],
+   "box": [
+    2188.6,
+    190.0,
+    1353.6,
+    76.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2316.6,
+    590.0,
+    259.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2316.6,
+    858.0,
+    259.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    2188.6,
+    1190.0,
+    259.2,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2316.6,
+    1522.0,
+    259.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2316.6,
+    1790.0,
+    259.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    2188.6,
+    2122.0,
+    259.2,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2316.6,
+    2454.0,
+    259.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2316.6,
+    2722.0,
+    259.2,
+    64.0
+   ]
+  },
+  {
+   "kind": "panel-gap",
+   "label": "Between checkpoints",
+   "tokens": [
+    "MGAP"
+   ],
+   "box": [
+    2447.8,
+    386.0,
+    128.0,
+    2668.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2575.8,
+    590.0,
+    336.0,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2575.8,
+    858.0,
+    336.0,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    2575.8,
+    1190.0,
+    336.0,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2575.8,
+    1522.0,
+    336.0,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2575.8,
+    1790.0,
+    336.0,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    2575.8,
+    2122.0,
+    336.0,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2575.8,
+    2454.0,
+    336.0,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    2575.8,
+    2722.0,
+    336.0,
+    64.0
+   ]
+  },
+  {
+   "kind": "panel-gap",
+   "label": "Between checkpoints",
+   "tokens": [
+    "MGAP"
+   ],
+   "box": [
+    2911.8,
+    386.0,
+    128.0,
+    2668.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    3039.8,
+    590.0,
+    374.4,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    3039.8,
+    858.0,
+    374.4,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    3039.8,
+    1190.0,
+    374.4,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    3039.8,
+    1522.0,
+    374.4,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    3039.8,
+    1790.0,
+    374.4,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    3039.8,
+    2122.0,
+    374.4,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    3039.8,
+    2454.0,
+    374.4,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    3039.8,
+    2722.0,
+    374.4,
+    64.0
+   ]
+  },
+  {
+   "kind": "row-gap",
+   "label": "Between family rows",
+   "tokens": [
+    "ROWGAP"
+   ],
+   "box": [
+    99.0,
+    3090.0,
+    3187.2,
+    384.0
+   ]
+  },
+  {
+   "kind": "title-gap",
+   "label": "Space under the family title",
+   "tokens": [
+    "TITLE_GAP"
+   ],
+   "box": [
+    355.0,
+    3442.0,
+    1123.2,
+    32.0
+   ]
+  },
+  {
+   "kind": "head-gap",
+   "label": "Space under the family rule",
+   "tokens": [
+    "HEAD_GAP"
+   ],
+   "box": [
+    355.0,
+    3478.0,
+    1123.2,
+    76.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    3878.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    4146.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    355.0,
+    4478.0,
+    220.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    4810.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    5078.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    355.0,
+    5410.0,
+    220.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    5742.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    483.0,
+    6010.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "panel-gap",
+   "label": "Between checkpoints",
+   "tokens": [
+    "MGAP"
+   ],
+   "box": [
+    575.8,
+    3674.0,
+    128.0,
+    2668.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    703.8,
+    3878.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    703.8,
+    4146.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    703.8,
+    4478.0,
+    220.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    703.8,
+    4810.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    703.8,
+    5078.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    703.8,
+    5410.0,
+    220.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    703.8,
+    5742.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    703.8,
+    6010.0,
+    220.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "panel-gap",
+   "label": "Between checkpoints",
+   "tokens": [
+    "MGAP"
+   ],
+   "box": [
+    924.6,
+    3674.0,
+    128.0,
+    2668.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1052.6,
+    3878.0,
+    297.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1052.6,
+    4146.0,
+    297.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    1052.6,
+    4478.0,
+    297.6,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1052.6,
+    4810.0,
+    297.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1052.6,
+    5078.0,
+    297.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    1052.6,
+    5410.0,
+    297.6,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1052.6,
+    5742.0,
+    297.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1052.6,
+    6010.0,
+    297.6,
+    64.0
+   ]
+  },
+  {
+   "kind": "family-gap",
+   "label": "Between families",
+   "tokens": [
+    "FGAP"
+   ],
+   "box": [
+    1478.2,
+    3474.0,
+    288.0,
+    2904.0
+   ]
+  },
+  {
+   "kind": "title-gap",
+   "label": "Space under the family title",
+   "tokens": [
+    "TITLE_GAP"
+   ],
+   "box": [
+    1766.2,
+    3442.0,
+    732.8,
+    32.0
+   ]
+  },
+  {
+   "kind": "head-gap",
+   "label": "Space under the family rule",
+   "tokens": [
+    "HEAD_GAP"
+   ],
+   "box": [
+    1766.2,
+    3478.0,
+    732.8,
+    76.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1894.2,
+    3878.0,
+    604.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1894.2,
+    4146.0,
+    604.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    1766.2,
+    4478.0,
+    604.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1894.2,
+    4810.0,
+    604.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1894.2,
+    5078.0,
+    604.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "prompt-gap",
+   "label": "Between prompt groups",
+   "tokens": [
+    "CELLGAP",
+    "TICKROW"
+   ],
+   "box": [
+    1766.2,
+    5410.0,
+    604.8,
+    128.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1894.2,
+    5742.0,
+    604.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "lens-gap",
+   "label": "Between lens rows",
+   "tokens": [
+    "LENS_GAP",
+    "PH"
+   ],
+   "box": [
+    1894.2,
+    6010.0,
+    604.8,
+    64.0
+   ]
+  },
+  {
+   "kind": "page-margin",
+   "label": "Page edge",
+   "tokens": [
+    "MX",
+    "PAD",
+    "TAILPAD"
+   ],
+   "box": [
+    -29.0,
+    -54.0,
+    128.0,
+    6816.0
+   ]
+  },
+  {
+   "kind": "page-margin",
+   "label": "Page edge",
+   "tokens": [
+    "MX",
+    "PAD",
+    "TAILPAD"
+   ],
+   "box": [
+    3669.0,
+    -54.0,
+    128.0,
+    6816.0
+   ]
+  },
+  {
+   "kind": "page-margin",
+   "label": "Page edge",
+   "tokens": [
+    "MX",
+    "PAD",
+    "TAILPAD"
+   ],
+   "box": [
+    -29.0,
+    -54.0,
+    3826.0,
+    124.0
+   ]
+  },
+  {
+   "kind": "page-margin",
+   "label": "Page edge",
+   "tokens": [
+    "MX",
+    "PAD",
+    "TAILPAD"
+   ],
+   "box": [
+    -29.0,
+    6690.0,
+    3826.0,
+    72.0
+   ]
+  },
+  {
+   "kind": "legend-gap",
+   "label": "Space before the legend",
+   "tokens": [
+    "LEGEND_GAP"
+   ],
+   "box": [
+    99.0,
+    6378.0,
+    3570.0,
+    256.0
+   ]
+  }
+ ]
+}

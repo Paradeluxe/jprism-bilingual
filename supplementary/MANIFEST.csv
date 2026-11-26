@@ -1,0 +1,71 @@
+path,kind,rows,bytes,sha256,source,description
+README.md,doc,,4063,158435986c2810345adf5ea72d29b26bbb282e558fd110d1406c4d21dec0ef20,,"Codebook: where to look, column definitions, reproduction filters."
+figures/FIGURES.md,doc,,9105,487b4b3755a2c0ff2630ac5bb0caed43eda18886df377d9ef72708aa2062cb64,,Gallery of Appendix Figures A1-A63 with captions.
+figures/figure-a01.png,figure,,271505,b8d8655407e45456159f0c1d0a16ec5c2f1cdd98c32cac34dfb377f98bf01135,manuscript appendix figure,Appendix Figure A1.
+figures/figure-a02.png,figure,,266672,dfd5426d90c198da63add42dbffe1dc29e3ef88fb5fa1dd90274ea1cc8cbb2f4,manuscript appendix figure,Appendix Figure A2.
+figures/figure-a03.png,figure,,261645,cc2c87c0f02eafcaa6dccd5bf96ffe43b538fd35b88903c98d82588ed03448e3,manuscript appendix figure,Appendix Figure A3.
+figures/figure-a04.png,figure,,245210,02944830011a38da4074f1b48b059c23ebd581125ae723a4fecbedaed4e8aab7,manuscript appendix figure,Appendix Figure A4.
+figures/figure-a05.png,figure,,79975,647d1bd317b5db0df502cdb5121c847edab402d87ddf8bd8fb64390e6eea981d,manuscript appendix figure,Appendix Figure A5.
+figures/figure-a06.png,figure,,77729,3de4ab8b48be25d16560feb774db938c3f3dd80673104fe7e29d5f81e1470381,manuscript appendix figure,Appendix Figure A6.
+figures/figure-a07.png,figure,,76772,82fcf97f1b5c857b06ba3a9c807fa7701ff46a60b478bcf29f863d6034032952,manuscript appendix figure,Appendix Figure A7.
+figures/figure-a08.png,figure,,74013,e7784898416b339cd66e0cc5d1c5f44ff396606d5ca9d85e7dc39a98aba2dd05,manuscript appendix figure,Appendix Figure A8.
+figures/figure-a09.png,figure,,55059,351e8e150cc69eb487f272a53cee323cbfd9539b69f350df498e553a74dc78d1,manuscript appendix figure,Appendix Figure A9.
+figures/figure-a10.png,figure,,52447,fe4de15b193f595d1f5b00184efb2cb32cfa949665142bb6f03bb66bb812abd2,manuscript appendix figure,Appendix Figure A10.
+figures/figure-a11.png,figure,,51634,e8ecbcd3d49c6f30ebd0def3bc95c8d197f2a69cc5aee8b87d7bf6832dde9959,manuscript appendix figure,Appendix Figure A11.
+figures/figure-a12.png,figure,,52524,bfaaddf35a77816ea3c33ee999214ddefca80c31fcc8406cec2803ce9ef76fdf,manuscript appendix figure,Appendix Figure A12.
+figures/figure-a13.png,figure,,55710,b147feee9657d921f3fd91f0bb1b90acd0ad8be34958d7b2f043ebaa2473d073,manuscript appendix figure,Appendix Figure A13.
+figures/figure-a14.png,figure,,54619,3a767e29f0a5eef78a90d99fb2a0aa93fdc6b5c7985b145d716970278c5cc35a,manuscript appendix figure,Appendix Figure A14.
+figures/figure-a15.png,figure,,53066,320dc208c62b05487630224b7a843d522591611d9f72e1f91fe4f7fa0abc6953,manuscript appendix figure,Appendix Figure A15.
+figures/figure-a16.png,figure,,52164,4b3748d89ae36feb6864da0dcaa383c9a2e8ecf6ff8f7fbbf149691c24579b74,manuscript appendix figure,Appendix Figure A16.
+figures/figure-a17.png,figure,,89676,e28f425dc2209f3b5f2a66325688d4837f813cb3050ecba43e49c49636385c0f,manuscript appendix figure,Appendix Figure A17.
+figures/figure-a18.png,figure,,88129,1ec4af1fc0fe33530873d1c75adab5e5da38c66f310dc05822915e89b3f67d3a,manuscript appendix figure,Appendix Figure A18.
+figures/figure-a19.png,figure,,86036,ebeac5492726b529ab6182a5a2bf4c3080f847c82732ae9ad1721b0266bb7edb,manuscript appendix figure,Appendix Figure A19.
+figures/figure-a20.png,figure,,85689,0a83be63bc615d78598160e8af37073189e1fe8958b4a2039b07f7d01b2169e0,manuscript appendix figure,Appendix Figure A20.
+figures/figure-a21.png,figure,,262715,5a833d65683ed604dd8860e59e82ede880661436ccf8fc61256508ad7881cb8e,manuscript appendix figure,Appendix Figure A21.
+figures/figure-a22.png,figure,,279398,886b7c95aaca76373853ce209e2026513bfcbc12f7b6b998a87ecc9f09658de0,manuscript appendix figure,Appendix Figure A22.
+figures/figure-a23.png,figure,,263882,e6116298753a3f6a4f67caa490c36793c424991aaaddda8cb7138b86f1d769f3,manuscript appendix figure,Appendix Figure A23.
+figures/figure-a24.png,figure,,230227,877030509000f0d82e39be6979ca975b8801bef8afa3ad572acc27ba4c5e2707,manuscript appendix figure,Appendix Figure A24.
+figures/figure-a25.png,figure,,77960,f7c13b3f8101a51cabf592063bf0bd63ba65c9e96b437929ffbaf13043e2b6c9,manuscript appendix figure,Appendix Figure A25.
+figures/figure-a26.png,figure,,79505,650860459c4f86272c670764467348b044f3abe5f4025298bba60c8f83bdd00b,manuscript appendix figure,Appendix Figure A26.
+figures/figure-a27.png,figure,,76606,1d23726884c0ed61a3e31ab5b441c29aa0c0e8ea8b1d70102c7a5079bbf91149,manuscript appendix figure,Appendix Figure A27.
+figures/figure-a28.png,figure,,70022,fd0f22db9695f254e46e09db12f120329dd33e673552864062160d1be8cbf09e,manuscript appendix figure,Appendix Figure A28.
+figures/figure-a29.png,figure,,55326,32b4885ba300bb75a01a18d957e74813aeffbb9491a0ce407f09785a0e155047,manuscript appendix figure,Appendix Figure A29.
+figures/figure-a30.png,figure,,53611,60252c5759a5dde3195f1e05eae4e8fd675d8f0b7a20820ff3452949793a4fd6,manuscript appendix figure,Appendix Figure A30.
+figures/figure-a31.png,figure,,50843,a4f4ec495814aa63361cee05694ba616a60da5d3beaf9fc9066a87787e1f8265,manuscript appendix figure,Appendix Figure A31.
+figures/figure-a32.png,figure,,50610,17108cffc7e470cdcb7a44cd481aeff3ec1c04e778cdeab918b012f5838f6532,manuscript appendix figure,Appendix Figure A32.
+figures/figure-a33.png,figure,,56194,a6d5a6516c583ffd353a878d948e269b13e452bdb850265b3671bf99adfb5137,manuscript appendix figure,Appendix Figure A33.
+figures/figure-a34.png,figure,,55963,73ed56771cfdb7cfbf56c5b05f625748c703cf8a836b6a2d7251acd3735b7a62,manuscript appendix figure,Appendix Figure A34.
+figures/figure-a35.png,figure,,50362,facdb5a1905639411e23d8deae26b3b206f987bf64008f95a970588c04dbf4d6,manuscript appendix figure,Appendix Figure A35.
+figures/figure-a36.png,figure,,48285,52e8801242a6812987e3db27c988824c563bc2013ce01cfed140c892990be25f,manuscript appendix figure,Appendix Figure A36.
+figures/figure-a37.png,figure,,92733,954f7937c7fa0597b8382edbfb22ac16d91ba94bcd2e542ef6f0296b2b0e4c30,manuscript appendix figure,Appendix Figure A37.
+figures/figure-a38.png,figure,,92269,69176d239cbf3ff43b9887680da32ea7f146f9062024a2d5abfae461db907e83,manuscript appendix figure,Appendix Figure A38.
+figures/figure-a39.png,figure,,87437,849754f5173e4664878d5ebd96b0b6db7988333722909cfff48aec2fc292d9e2,manuscript appendix figure,Appendix Figure A39.
+figures/figure-a40.png,figure,,84258,b28096d65cf087f458604c84d14589f1f4469bfba86992901fa7510b727e8eaa,manuscript appendix figure,Appendix Figure A40.
+figures/figure-a41.png,figure,,262390,bddb15ccb1d9a4d2cc70dc709ee4499d12bfb1cd7887862cdac421b36b7aa16b,manuscript appendix figure,Appendix Figure A41.
+figures/figure-a42.png,figure,,266510,0dad640dd08ba06dca7494cbc48ce25e2e2ed6c871e0e292e5f2e99124284304,manuscript appendix figure,Appendix Figure A42.
+figures/figure-a43.png,figure,,256384,5b6e512d4dbe01296ee6f734205654854928f7c0ff3f573a29d5c040dd0057b9,manuscript appendix figure,Appendix Figure A43.
+figures/figure-a44.png,figure,,236071,34b4a8a0b090fbcabd1c1555ba7ca68700e3c0ee62aaecc76e453d612c1fbf4f,manuscript appendix figure,Appendix Figure A44.
+figures/figure-a45.png,figure,,76242,32a1b775db08256601c8b2ed01a46535984e4961363a24b7f04e4ddeb46e7ad0,manuscript appendix figure,Appendix Figure A45.
+figures/figure-a46.png,figure,,80098,3d15030723fb462e531744e0fd64e27062e81ca75568f139e5e5e678dd37b67f,manuscript appendix figure,Appendix Figure A46.
+figures/figure-a47.png,figure,,77617,675e2a3a376363595f1b9da9c72b6bad2c05cf947cf9b651335297abbeab467f,manuscript appendix figure,Appendix Figure A47.
+figures/figure-a48.png,figure,,71185,1f5554028ddb311dd149eb35bbf631ef204801986ef9ee1acb8e53de7bbabb2f,manuscript appendix figure,Appendix Figure A48.
+figures/figure-a49.png,figure,,55197,05a0cdd757b9f638dee50717037b170222402a5fcf017eeaff80fe5db7a77294,manuscript appendix figure,Appendix Figure A49.
+figures/figure-a50.png,figure,,52802,7688ba04be51ce131170c8da81b4fb62efb47fc4950f5960950efc9bf0291990,manuscript appendix figure,Appendix Figure A50.
+figures/figure-a51.png,figure,,51825,dbd711cd45cbdcf62fc957940bdef70a46728b1d939ddd8201ec805129d2d455,manuscript appendix figure,Appendix Figure A51.
+figures/figure-a52.png,figure,,51282,4963bbb0187c77c2998b85d81dfb6ff133bbb865798550b25951edd20c8aad4c,manuscript appendix figure,Appendix Figure A52.
+figures/figure-a53.png,figure,,56131,6fa7c56b2c83d9f71833fe7f3cad6b58bdfe5292b30d86c41599ccf11269d41b,manuscript appendix figure,Appendix Figure A53.
+figures/figure-a54.png,figure,,55406,4e61f7015e9a009a7911fd9e5de991e0613af55acf483de8e13ab94670542b70,manuscript appendix figure,Appendix Figure A54.
+figures/figure-a55.png,figure,,50100,814e7fcf1fe54df9161196887658cfbb0b2170c1008952d8f4b9d83a9fb0850c,manuscript appendix figure,Appendix Figure A55.
+figures/figure-a56.png,figure,,48742,4865c7dcec4cf7b3c65332f854b631f793bfeb27458a2ebd68d8415fa79c4fbc,manuscript appendix figure,Appendix Figure A56.
+figures/figure-a57.png,figure,,89756,90b6dcb50f9badf0c993280c68fce0268996262973255922ba68b5a960916a4c,manuscript appendix figure,Appendix Figure A57.
+figures/figure-a58.png,figure,,90322,2719fc7b180a1e19c18a2aba3f1cc05b29d5ede424e5e35b90aa5b6c518f4d4a,manuscript appendix figure,Appendix Figure A58.
+figures/figure-a59.png,figure,,88261,c88bf5d05ddc86788ce01e778ac4ccfdbd396f0f98fd57be7b31a14e2bbe9b58,manuscript appendix figure,Appendix Figure A59.
+figures/figure-a60.png,figure,,85402,d8d0b5aab89328d4f42502f05ec8e423ae40464a2bbf2366e7c2655dfe5419f5,manuscript appendix figure,Appendix Figure A60.
+figures/figure-a61.png,figure,,98454,93d900e8c95b07d1672068cc11ec4e279cc7c3a4ea16d421d64da6590b116912,manuscript appendix figure,Appendix Figure A61.
+figures/figure-a62.png,figure,,98135,309359a24d9cbf5bffb4360df17c0d452490050be168b7a45e887d57650244c9,manuscript appendix figure,Appendix Figure A62.
+figures/figure-a63.png,figure,,82569,904ca2c6c5a06f58cf5a274d9b7f5cb69f804db90a432c56b8ad36b27ae5a974,manuscript appendix figure,Appendix Figure A63.
+tables/cell-means.csv,table,3033,266769,38eb87b1b93461ac5f3435117954a2714015e0ec4d6198a80bbfe19fc58c4b87,experiment/stats_mixed/results/barr_cell_means.csv (2026-11-25 08:42),"Cell means, arcsine scale and percentage points."
+tables/contrast-tables.csv,table,12996,2015786,e95c106615ee187fafd816662a32c1eadb004bd96585078a6d296a9964926926,experiment/stats_mixed/results/barr_contrasts.csv (2026-11-25 08:42),Per-model contrast estimates for every outcome.
+tables/omnibus-terms.csv,table,819,80219,29469e744033bfe117f3812ce455577b50a4074da78cb3d4ea51cc0927ef418d,experiment/stats_mixed/results/barr_terms.csv (2026-11-25 08:33),"Type III omnibus tests per model, outcome and term."
+tables/post-training-by-lens.csv,table,27,4569,bc0ba95c77ef437a941b627cd53c034c1646052f98dda2adeeb1e2d5392e5745,experiment/stats_modelpref/results/diff_by_lens.csv (2026-11-25 09:23),The same difference under each fitted lens.
+tables/post-training-lens-balanced.csv,table,9,1525,0d638537c34d151213260093afd8d0d6cfac2e5338e0cbb13086859ac50fed0e,experiment/stats_modelpref/results/diff_modellevel.csv (2026-11-25 09:23),Lens-balanced Arete-27B minus Qwen3.8-27B posterior differences.

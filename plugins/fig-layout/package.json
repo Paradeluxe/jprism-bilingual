@@ -1,0 +1,30 @@
+{
+  "name": "@local/dsh-fig-layout",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read, audit, render and patch the spacing tokens of the J-Prism figure plates, with a right-Sidebar editor.",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "audit.py",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-conversation"]
+    }
+  }
+}

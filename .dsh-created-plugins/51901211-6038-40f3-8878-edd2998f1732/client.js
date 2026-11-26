@@ -31,7 +31,7 @@
   const NS = 'jspaceDashboard'
 
   /** The dashboard the tab embeds; the page refreshes itself every 30 seconds. */
-  const PAGE_URL = 'http://127.0.0.1:8904/'
+  const PAGE_URL = 'http://127.0.0.1:8904/?embed=1'
 
   /**
    * The Session this page belongs to. The tab is opened only while that Session is the one on
@@ -46,6 +46,57 @@
   /** Probe cadence: the page's own refresh rhythm while up, a faster retry while down. */
   const ONLINE_POLL_MS = 30000
   const OFFLINE_POLL_MS = 10000
+
+  /**
+   * The page refreshes itself (every 60 s in embed mode) and keeps the scroll position, so a timed
+   * remount is counter-productive: only remount when a probe brings a dead service back.
+   */
+  const REMOUNT_EVERY_TICKS = 0
+
+  /** Cell-counter feed: /progress.json answers CORS, so the tab title can show 114/135. */
+  const PROGRESS_URL = 'http://127.0.0.1:8904/progress.json'
+
+  /** Chip cadence; the embedded page refreshes itself every 60 s. */
+  const CELLS_POLL_MS = 20000
+
+  /** Tiny store shared by the poller and the Slot-rendered title. */
+  const cells = { text: '', listeners: new Set() }
+
+  function setCells(text) {
+    if (cells.text === text) return
+    cells.text = text
+    for (const fn of Array.from(cells.listeners)) {
+      try { fn(text) } catch (error) { /* a stale title render must not break the poller */ }
+    }
+  }
+
+  async function pollCells() {
+    try {
+      const res = await fetch(PROGRESS_URL, { cache: 'no-store', credentials: 'omit' })
+      if (!res.ok) return
+      const data = await res.json()
+      setCells(typeof data.cells === 'number' && typeof data.target === 'number'
+        ? `${data.cells}/${data.target}` : '')
+    } catch (error) {
+      /* keep the last good value */
+    }
+  }
+
+  /** Subscribe a title render to the counter and poll while it is mounted. */
+  function useCells() {
+    const [text, setText] = React.useState(cells.text)
+    React.useEffect(() => {
+      cells.listeners.add(setText)
+      setText(cells.text)
+      void pollCells()
+      const timer = setInterval(() => { void pollCells() }, CELLS_POLL_MS)
+      return () => {
+        clearInterval(timer)
+        cells.listeners.delete(setText)
+      }
+    }, [])
+    return text
+  }
 
   /**
    * Liveness probe options. `no-cors` makes a cross-origin HEAD a simple
@@ -74,7 +125,7 @@
     'guide.title': 'jspace 仪表盘',
     'guide.description': '内嵌 8904 上运行的透镜实验仪表盘。',
     'frame.title': 'jspace 透镜实验仪表盘',
-    'status.offline': '8904 未运行',
+    'status.offline': '8904 端口未运行，每 10 秒自动重试。',
   }
 
   window.__ModuleLoader__.load({
@@ -132,6 +183,7 @@
       function DashboardBody(props) {
         const t = translate(props)
         const [view, setView] = React.useState({ status: 'checking', epoch: 0 })
+        const ticks = React.useRef(0)
 
         React.useEffect(() => {
           let disposed = false
@@ -150,9 +202,12 @@
             if (disposed) return
             setView(current => {
               const status = alive ? 'online' : 'offline'
-              if (current.status === status) return current
-              // A fresh epoch remounts the iframe when the service comes back.
-              return { status, epoch: status === 'online' ? current.epoch + 1 : current.epoch }
+              if (!alive) return current.status === 'offline' ? current : { status, epoch: current.epoch }
+              ticks.current += 1
+              const forceRemount = REMOUNT_EVERY_TICKS > 0 && ticks.current % REMOUNT_EVERY_TICKS === 0
+              if (current.status === 'online' && !forceRemount) return current
+              // A fresh epoch remounts the iframe: on recovery, and periodically as a safety net.
+              return { status, epoch: current.epoch + 1 }
             })
             timer = setTimeout(tick, alive ? ONLINE_POLL_MS : OFFLINE_POLL_MS)
           }
@@ -220,7 +275,9 @@
       /** The tab chip: the lens glyph beside the dashboard's name. */
       function DashboardTitle(props) {
         const t = translate(props)
-        return h(React.Fragment, null, h(LensGlyph, { size: 14, marginRight: true }), t('tab.title'))
+        const count = useCells()
+        return h(React.Fragment, null, h(LensGlyph, { size: 14, marginRight: true }),
+          count ? `${t('tab.title')} ${count}` : t('tab.title'))
       }
 
       /**

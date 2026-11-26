@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "图版间距编辑器",
+    "description": "读取、测量、修改并重新渲染 J-Prism 图版的间距 token，并把同一套操作提供给侧栏编辑器。",
+    "detail": "docs/DETAIL.md"
+  }
+}
