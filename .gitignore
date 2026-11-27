@@ -15,3 +15,7 @@ fit_ckpt/
 /experiment/
 /manuscript/
 tmp_*
+
+# Local DSH runtime state and created plugins.
+/.dsh/
+/.dsh-created-plugins/

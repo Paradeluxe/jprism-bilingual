@@ -1,6 +1,0 @@
-{
-  "meta": {
-    "title": "jspace dashboard",
-    "description": "A resident Right Sidebar tab with the compact layout of the live jspace lens-experiment dashboard on 127.0.0.1:8904; its chip shows the live cell count (e.g. 114/135) and it retries every 10 s while the service is down."
-  }
-}
