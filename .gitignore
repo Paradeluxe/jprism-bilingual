@@ -14,3 +14,4 @@ fit_ckpt/
 # Present on this machine; not part of the git history.
 /experiment/
 /manuscript/
+tmp_*
