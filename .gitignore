@@ -19,3 +19,9 @@ tmp_*
 # Local DSH runtime state and created plugins.
 /.dsh/
 /.dsh-created-plugins/
+
+# Local tool state and manuscript snapshots.
+/.audit/
+/.idea/
+/.obsidian/
+/.snapshots/

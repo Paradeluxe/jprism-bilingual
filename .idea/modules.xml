@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/jlens.iml" filepath="$PROJECT_DIR$/.idea/jlens.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/jspace-repo.iml" filepath="$PROJECT_DIR$/.idea/jspace-repo.iml" />
-    </modules>
-  </component>
-</project>
