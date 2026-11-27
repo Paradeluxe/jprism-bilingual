@@ -25,3 +25,20 @@ tmp_*
 /.idea/
 /.obsidian/
 /.snapshots/
+
+# Local DSH tooling, plugin sources and superseded figure drafts.
+/plugin-audit.md
+/plugins/
+/tools/_scan_dsh_api.mjs
+/tools/ui-harness/
+/tools/fig-test/out/
+/tools/fig-test/quick_svg.py
+/tools/fig-test/req.json
+/figures/_*
+/figures/*_v[0-9]*.png
+/figures/fig1a_*
+/figures/fig1b_*
+/figures/fig3_blackouts.png
+/figures/fig4_blackout_heatmap_v[0-9]*.png
+/figures/fig4_identity_composition_pooled.png
+/figures/fig6_blackouts_zhprompt.png

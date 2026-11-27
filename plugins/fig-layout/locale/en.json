@@ -1,7 +1,0 @@
-{
-  "meta": {
-    "title": "Figure spacing editor",
-    "description": "Reads, audits, patches and re-renders the spacing tokens of the J-Prism figure plates, and serves the same operations to a sidebar editor.",
-    "detail": "docs/DETAIL.md"
-  }
-}
